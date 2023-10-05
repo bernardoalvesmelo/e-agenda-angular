@@ -4,10 +4,10 @@ import { TipoLocal } from "./compromisso-tipoLocal.enum";
 export class VisualizarCompromissoViewModel {
   
   id: string;
+  local: string;
   assunto: string;
   tipoLocal: TipoLocal;
   link: string;
-  local: string;
   data: Date;
   horaInicio: Date;
   horaTermino: Date;
@@ -16,9 +16,9 @@ export class VisualizarCompromissoViewModel {
   constructor(
     id: string,
     assunto: string,
+    local: string,
     tipoLocal: TipoLocal,
     link: string,
-    local: string,
     data: Date,
     horaInicio: Date,
     horaTermino: Date,

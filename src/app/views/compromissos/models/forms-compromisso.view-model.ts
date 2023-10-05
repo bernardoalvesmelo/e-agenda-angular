@@ -3,9 +3,9 @@ import { TipoLocal } from "./compromisso-tipoLocal.enum";
 export class FormsCompromissoViewModel {
   
   assunto: string;
+  local: string;
   tipoLocal: TipoLocal;
   link: string;
-  local: string;
   data: Date;
   horaInicio: Date;
   horaTermino: Date;
@@ -13,9 +13,9 @@ export class FormsCompromissoViewModel {
 
   constructor(
     assunto: string,
+    local: string,
     tipoLocal: TipoLocal,
     link: string,
-    local: string,
     data: Date,
     horaInicio: Date,
     horaTermino: Date,

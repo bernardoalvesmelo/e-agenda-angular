@@ -24,7 +24,7 @@ export class InserirContatoComponent implements OnInit {
     private contatoService: ContatosService,
     private router: Router,
     private toastService: ToastrService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -47,22 +47,34 @@ export class InserirContatoComponent implements OnInit {
   gravar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.toastService.error(
+      this.toastService.warning(
         `Contato não pode ser inserido com campos inválidos.`,
-        'Erro'
+        'Aviso'
       );
       return;
     }
 
     this.contatoVM = this.form.value;
 
-    this.contatoService.inserir(this.contatoVM).subscribe((res) => {
-      this.toastService.success(
-        `Contato inserido com sucesso.`,
-        'Sucesso'
-      );
-
-      this.router.navigate(['/contatos/listar']);
+    this.contatoService.inserir(this.contatoVM).subscribe({
+      next: (res: FormsContatoViewModel) => this.processarSucesso(res),
+      error: (err: Error) => this.processarFalha(err)
     });
+  }
+
+  processarSucesso(contato: FormsContatoViewModel) {
+    this.toastService.success(
+      `Contato ${contato.nome} inserido com sucesso.`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/contatos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(
+      erro.message,
+      'Erro'
+    );
   }
 }

@@ -23,8 +23,8 @@ export class ExcluirCompromissoComponent implements OnInit{
     this.compromissoVM = new VisualizarCompromissoViewModel(
       '',
       '',
-      TipoLocal.Presencial,
       '',
+      TipoLocal.Presencial,
       '',
       new Date(),
       new Date(),
@@ -40,15 +40,32 @@ export class ExcluirCompromissoComponent implements OnInit{
 
     this.compromissoService
       .selecionarCompromissoCompletoPorId(this.idSelecionado)
-      .subscribe((res) => {
-        this.compromissoVM = res;
+      .subscribe({ 
+        next: (res: VisualizarCompromissoViewModel) => this.compromissoVM = res,
+        error: (err: Error) => this.processarFalha(err)
       });
-  }
+    }
 
   gravar() {
-    this.compromissoService.excluir(this.idSelecionado!).subscribe((res) => {
-      this.toastService.success('Compromisso excluído com sucesso.', 'Sucesso');
-      this.router.navigate(['/compromissos', 'listar']);
+    this.compromissoService.excluir(this.idSelecionado!).subscribe({
+      next: () => this.processarSucesso(),
+      error: (err: Error) => this.processarFalha(err)
     });
+  }
+
+  processarSucesso() {
+    this.toastService.success(
+      'Compromisso excluído com sucesso.',
+      'Sucesso'
+    );
+
+    this.router.navigate(['/compromissos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(
+      erro.message,
+      'Erro'
+    );
   }
 }

@@ -32,9 +32,9 @@ export class EditarCompromissoComponent {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
      assunto: new FormControl('', [Validators.required]),
+     local: new FormControl('', [Validators.required]),
      tipoLocal: new FormControl('', [Validators.required]),
      link: new FormControl('', [Validators.required]),
-     local: new FormControl('', [Validators.required]),
      data: new FormControl(new Date(), [Validators.required]),
      horaInicio: new FormControl('08:00', [Validators.required]),
      horaTermino: new FormControl('09:00', [Validators.required]),
@@ -46,9 +46,18 @@ export class EditarCompromissoComponent {
 
     if(!this.idSelecionado) return;
 
-    this.compromissoService.selecionarPorId(this.idSelecionado).subscribe(res => {
-      this.form.patchValue(res);
-    })
+    this.compromissoService.selecionarPorId(this.idSelecionado).subscribe({
+      next: (res: FormsCompromissoViewModel) => {
+        this.form.patchValue(res);
+        this.form.get('data')?.setValue(res.data.toString().substring(0, 10));
+      },
+      error: (err: Error) => this.processarFalha(err)
+    });
+
+    this.contatoService.selecionarTodos().subscribe({
+      next: (res: ListarContatoViewModel[]) => this.contatos = res,
+      error: (err: Error) => this.processarFalha(err)
+    });
   }
 
   campoEstaInvalido(nome: string) {
@@ -58,22 +67,34 @@ export class EditarCompromissoComponent {
   gravar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.toastService.error(
-        `Compromisso não pode ser inserido com campos inválidos.`,
-        'Erro'
+      this.toastService.warning(
+        `Compromisso não pode ser editado com campos inválidos.`,
+        'Aviso'
       );
       return;
     }
 
     this.compromissoVM = this.form.value;
 
-    this.compromissoService.editar(this.idSelecionado!, this.compromissoVM).subscribe((res) => {
-      this.toastService.success(
-        `Compromisso editado com sucesso.`,
-        'Sucesso'
-        );
-
-      this.router.navigate(['/compromissos/listar']);
+    this.compromissoService.editar(this.idSelecionado!, this.compromissoVM).subscribe({
+      next: (res: FormsCompromissoViewModel) => this.processarSucesso(res),
+      error: (err: Error) => this.processarFalha(err)
     });
+  }
+
+  processarSucesso(compromisso: FormsCompromissoViewModel) {
+    this.toastService.success(
+      `Compromisso ${compromisso.assunto} editado com sucesso.`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/compromissos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(
+      erro.message,
+      'Erro'
+    );
   }
 }

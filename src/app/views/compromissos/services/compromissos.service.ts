@@ -18,13 +18,14 @@ export class CompromissosService {
     return this.http.post<any>(
       this.endpoint,
       compromisso,
-      this.obterHeadersAutorizacao()
-    );
+      this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados));
+    
   }
 
-  public editar(id: string, contato: FormsCompromissoViewModel) {
+  public editar(id: string, compromisso: FormsCompromissoViewModel) {
     return this.http
-      .put<any>(this.endpoint + id, contato, this.obterHeadersAutorizacao())
+      .put<any>(this.endpoint + id, compromisso, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados));
   }
 

@@ -43,9 +43,10 @@ export class EditarContatoComponent {
 
     if(!this.idSelecionado) return;
 
-    this.contatoService.selecionarPorId(this.idSelecionado).subscribe(res => {
-      this.form.patchValue(res);
-    })
+    this.contatoService.selecionarPorId(this.idSelecionado).subscribe({
+      next: (res: FormsContatoViewModel) => this.form.patchValue(res),
+      error: (err: Error) => this.processarFalha(err)
+    });
 
   }
 
@@ -61,22 +62,34 @@ export class EditarContatoComponent {
   gravar() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.toastService.error(
-        `Contato não pode ser inserido com campos inválidos.`,
-        'Erro'
+      this.toastService.warning(
+        `Contato não pode ser editado com campos inválidos.`,
+        'Aviso'
       );
       return;
     }
 
     this.contatoVM = this.form.value;
 
-    this.contatoService.editar(this.idSelecionado!, this.contatoVM).subscribe((res) => {
-      this.toastService.success(
-        `Contato editado com sucesso.`,
-        'Sucesso'
-      );
-
-      this.router.navigate(['/contatos/listar']);
+    this.contatoService.editar(this.idSelecionado!, this.contatoVM).subscribe({
+      next: (res: FormsContatoViewModel) => this.processarSucesso(res),
+      error: (err: Error) => this.processarFalha(err)
     });
+  }
+
+  processarSucesso(contato: FormsContatoViewModel) {
+    this.toastService.success(
+      `Contato ${contato.nome} editado com sucesso.`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/contatos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(
+      erro.message,
+      'Erro'
+    );
   }
 }

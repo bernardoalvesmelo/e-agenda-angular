@@ -29,15 +29,32 @@ export class ExcluirContatoComponent implements OnInit {
 
     this.contatoService
       .selecionarContatoCompletoPorId(this.idSelecionado)
-      .subscribe((res) => {
-        this.contatoVM = res;
+      .subscribe({
+        next: (res: VisualizarContatoViewModel) => this.contatoVM = res,
+        error: (err: Error) => this.processarFalha(err)
       });
   }
 
   gravar() {
-    this.contatoService.excluir(this.idSelecionado!).subscribe((res) => {
-      this.toastService.success('Contato excluído com sucesso.', 'Sucesso');
-      this.router.navigate(['/contatos', 'listar']);
+    this.contatoService.excluir(this.idSelecionado!).subscribe({
+      next: () => this.processarSucesso(),
+      error: (err: Error) => this.processarFalha(err)
     });
+  }
+
+  processarSucesso() {
+    this.toastService.success(
+      `Contato excluído com sucesso.`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/contatos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(
+      erro.message,
+      'Erro'
+    );
   }
 }
