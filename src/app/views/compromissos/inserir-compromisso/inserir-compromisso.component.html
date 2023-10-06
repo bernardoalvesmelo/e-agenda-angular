@@ -26,9 +26,9 @@
             <input [ngClass]="campoEstaInvalido('tipoLocal') ? 'is-invalid' : ''" formControlName="tipoLocal"
               name="tipoLocal" type="radio" [value]="1" />
             Presencial
-            <div *ngIf="campoEstaInvalido('tipoLocal')">
-              <span class="bg-danger rounded-2 text-light px-2 pb-1">O tipo de local precisa ser preenchido.</span>
-            </div>
+          </div>
+          <div *ngIf="campoEstaInvalido('tipoLocal')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">O tipo de local precisa ser preenchido.</span>
           </div>
         </div>
 
