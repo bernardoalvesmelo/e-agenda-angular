@@ -46,11 +46,10 @@ export class InserirContatoComponent implements OnInit {
 
   gravar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      this.toastService.warning(
-        `Contato não pode ser inserido com campos inválidos.`,
-        'Aviso'
-      );
+      for (let erro of this.form.validate()) {
+        this.toastService.warning(erro);
+      }
+
       return;
     }
 

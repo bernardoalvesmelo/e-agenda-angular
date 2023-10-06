@@ -3,6 +3,7 @@ import { VisualizarContatoViewModel } from '../models/visualizar-contato.view-mo
 import { ContatosService } from '../services/contatos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-excluir-contato',
@@ -27,8 +28,7 @@ export class ExcluirContatoComponent implements OnInit {
 
     if (!this.idSelecionado) return;
 
-    this.contatoService
-      .selecionarContatoCompletoPorId(this.idSelecionado)
+    this.route.data.pipe(map(res => res['contato']))
       .subscribe({
         next: (res: VisualizarContatoViewModel) => this.contatoVM = res,
         error: (err: Error) => this.processarFalha(err)

@@ -4,13 +4,14 @@ import { CompromissosService } from '../services/compromissos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TipoLocal } from '../models/compromisso-tipoLocal.enum';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-excluir-compromisso',
   templateUrl: './excluir-compromisso.component.html',
   styleUrls: ['./excluir-compromisso.component.css']
 })
-export class ExcluirCompromissoComponent implements OnInit{
+export class ExcluirCompromissoComponent implements OnInit {
   compromissoVM!: VisualizarCompromissoViewModel;
   idSelecionado: string | null = null;
 
@@ -38,13 +39,12 @@ export class ExcluirCompromissoComponent implements OnInit{
 
     if (!this.idSelecionado) return;
 
-    this.compromissoService
-      .selecionarCompromissoCompletoPorId(this.idSelecionado)
-      .subscribe({ 
+    this.route.data.pipe(map(res => res['compromisso']))
+      .subscribe({
         next: (res: VisualizarCompromissoViewModel) => this.compromissoVM = res,
         error: (err: Error) => this.processarFalha(err)
       });
-    }
+  }
 
   gravar() {
     this.compromissoService.excluir(this.idSelecionado!).subscribe({

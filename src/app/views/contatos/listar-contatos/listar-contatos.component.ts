@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ContatosService } from '../services/contatos.service';
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-listar-contatos',
@@ -12,14 +13,14 @@ export class ListarContatosComponent implements OnInit {
   contatos: ListarContatoViewModel[];
 
   constructor(
-    private contatosService: ContatosService,
+    private route: ActivatedRoute,
     private toastService: ToastrService,  
   ) {
     this.contatos = [];
   }
 
   ngOnInit(): void {
-    this.contatosService.selecionarTodos().subscribe({
+    this.route.data.pipe(map(res => res['contatos'])).subscribe({
       next: (res: ListarContatoViewModel[]) => this.contatos = res,
       error: (err: Error) => this.processarFalha(err)
     });

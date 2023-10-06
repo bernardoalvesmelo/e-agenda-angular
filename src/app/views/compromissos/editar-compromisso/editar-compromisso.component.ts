@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ListarContatoViewModel } from '../../contatos/models/listar-contato.view-model';
-import { ContatosService } from '../../contatos/services/contatos.service';
 import { FormsCompromissoViewModel } from '../models/forms-compromisso.view-model';
 import { CompromissosService } from '../services/compromissos.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-compromisso',
@@ -15,13 +15,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditarCompromissoComponent {
   form!: FormGroup;
   compromissoVM!: FormsCompromissoViewModel;
-  contatos!: ListarContatoViewModel[]; 
+  contatos!: ListarContatoViewModel[];
   idSelecionado: string | null;
 
   constructor(
     private formBuilder: FormBuilder,
     private compromissoService: CompromissosService,
-    private contatoService: ContatosService,
     private router: Router,
     private toastService: ToastrService,
     private route: ActivatedRoute,
@@ -31,22 +30,22 @@ export class EditarCompromissoComponent {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-     assunto: new FormControl('', [Validators.required]),
-     local: new FormControl('', [Validators.required]),
-     tipoLocal: new FormControl('', [Validators.required]),
-     link: new FormControl('', [Validators.required]),
-     data: new FormControl(new Date(), [Validators.required]),
-     horaInicio: new FormControl('08:00', [Validators.required]),
-     horaTermino: new FormControl('09:00', [Validators.required]),
-     contatoId: new FormControl(null)
+      assunto: new FormControl('', [Validators.required]),
+      local: new FormControl('', [Validators.required]),
+      tipoLocal: new FormControl('', [Validators.required]),
+      link: new FormControl('', [Validators.required]),
+      data: new FormControl(new Date(), [Validators.required]),
+      horaInicio: new FormControl('08:00', [Validators.required]),
+      horaTermino: new FormControl('09:00', [Validators.required]),
+      contatoId: new FormControl(null)
     });
 
-   
+
     this.idSelecionado = this.route.snapshot.paramMap.get('id');
 
-    if(!this.idSelecionado) return;
+    if (!this.idSelecionado) return;
 
-    this.compromissoService.selecionarPorId(this.idSelecionado).subscribe({
+    this.route.data.pipe(map(res => res['compromisso'])).subscribe({
       next: (res: FormsCompromissoViewModel) => {
         this.form.patchValue(res);
         this.form.get('data')?.setValue(res.data.toString().substring(0, 10));
@@ -54,7 +53,7 @@ export class EditarCompromissoComponent {
       error: (err: Error) => this.processarFalha(err)
     });
 
-    this.contatoService.selecionarTodos().subscribe({
+    this.route.data.pipe(map(res => res['contatos'])).subscribe({
       next: (res: ListarContatoViewModel[]) => this.contatos = res,
       error: (err: Error) => this.processarFalha(err)
     });
@@ -66,11 +65,10 @@ export class EditarCompromissoComponent {
 
   gravar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      this.toastService.warning(
-        `Compromisso não pode ser editado com campos inválidos.`,
-        'Aviso'
-      );
+      for (let erro of this.form.validate()) {
+        this.toastService.warning(erro);
+      }
+
       return;
     }
 

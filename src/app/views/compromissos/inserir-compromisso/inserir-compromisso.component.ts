@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsCompromissoViewModel } from '../models/forms-compromisso.view-model';
 import { CompromissosService } from '../services/compromissos.service';
-import { Router } from '@angular/router';
-import { ContatosService } from '../../contatos/services/contatos.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ListarContatoViewModel } from '../../contatos/models/listar-contato.view-model';
 import { ToastrService } from 'ngx-toastr';
-import { FormsContatoViewModel } from '../../contatos/models/forms-contato.view-model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-inserir-compromisso',
@@ -21,7 +20,7 @@ export class InserirCompromissoComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private compromissoService: CompromissosService,
-    private contatoService: ContatosService,
+    private route: ActivatedRoute,
     private router: Router,
     private toastService: ToastrService,
   ) { }
@@ -38,7 +37,7 @@ export class InserirCompromissoComponent implements OnInit {
       contatoId: new FormControl(null)
     });
 
-    this.contatoService.selecionarTodos().subscribe({
+    this.route.data.pipe(map(res => res['contatos'])).subscribe({
       next: (res: ListarContatoViewModel[]) => this.contatos = res,
       error: (err: Error) => this.processarFalha(err)
     });
@@ -50,11 +49,10 @@ export class InserirCompromissoComponent implements OnInit {
 
   gravar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      this.toastService.warning(
-        `Compromisso não pode ser inserido com campos inválidos.`,
-        'Aviso'
-      );
+      for (let erro of this.form.validate()) {
+        this.toastService.warning(erro);
+      }
+
       return;
     }
 

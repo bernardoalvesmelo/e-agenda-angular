@@ -6,6 +6,8 @@ import { FormsCompromissoViewModel } from '../models/forms-compromisso.view-mode
 import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
 import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
 
+import 'src/app/extensions/form-group.extension';
+
 
 @Injectable()
 export class CompromissosService {

@@ -9,6 +9,8 @@ import { EditarContatoComponent } from './editar-contato/editar-contato.componen
 import { ExcluirContatoComponent } from './excluir-contato/excluir-contato.component';
 import { CardContatoComponent } from './shared/card-contato/card-contato.component';
 
+import 'src/app/extensions/form-group.extension';
+
 @NgModule({
   declarations: [InserirContatoComponent, ListarContatosComponent, EditarContatoComponent, ExcluirContatoComponent, CardContatoComponent],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],

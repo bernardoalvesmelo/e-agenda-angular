@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
-import { CompromissosService } from '../services/compromissos.service';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listar-compromissos',
@@ -12,14 +13,14 @@ export class ListarCompromissosComponent implements OnInit{
   compromissos: ListarCompromissoViewModel[];
 
   constructor(
-    private compromissoService: CompromissosService,
+    private route: ActivatedRoute,
     private toastService: ToastrService
     ) {
       this.compromissos = [];
     }
 
   ngOnInit(): void {
-    this.compromissoService.selecionarTodos().subscribe({
+    this.route.data.pipe(map(res => res['compromissos'])).subscribe({
       next: (res: ListarCompromissoViewModel[]) => this.compromissos = res,
       error: (err: Error) => this.processarFalha(err)
     });

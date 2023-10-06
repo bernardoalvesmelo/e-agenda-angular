@@ -9,13 +9,14 @@ import { ContatosService } from '../services/contatos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-contato',
   templateUrl: './editar-contato.component.html',
   styleUrls: ['./editar-contato.component.css']
 })
-export class EditarContatoComponent {
+export class EditarContatoComponent implements OnInit{
   form!: FormGroup;
   contatoVM!: FormsContatoViewModel;
   idSelecionado: string | null;
@@ -43,7 +44,7 @@ export class EditarContatoComponent {
 
     if(!this.idSelecionado) return;
 
-    this.contatoService.selecionarPorId(this.idSelecionado).subscribe({
+    this.route.data.pipe(map(res => res['contato'])).subscribe({
       next: (res: FormsContatoViewModel) => this.form.patchValue(res),
       error: (err: Error) => this.processarFalha(err)
     });
@@ -61,11 +62,10 @@ export class EditarContatoComponent {
 
   gravar() {
     if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      this.toastService.warning(
-        `Contato não pode ser editado com campos inválidos.`,
-        'Aviso'
-      );
+      for (let erro of this.form.validate()) {
+        this.toastService.warning(erro);
+      }
+
       return;
     }
 
