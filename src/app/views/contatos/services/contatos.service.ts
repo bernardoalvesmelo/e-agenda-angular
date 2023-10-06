@@ -13,9 +13,7 @@ export class ContatosService {
 
   constructor(private http: HttpClient) {}
 
-  public inserir(
-    contato: FormsContatoViewModel
-  ): Observable<FormsContatoViewModel> {
+  public inserir(contato: FormsContatoViewModel): Observable<FormsContatoViewModel> {
     return this.http.post<any>(
       this.endpoint, contato, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
