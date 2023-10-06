@@ -8,76 +8,49 @@
       <form [formGroup]="form" (ngSubmit)="gravar()" class="mt-4">
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Nome:</label>
-          <input
-            formControlName="nome"
-            [ngClass]="campoEstaInvalido('nome') ? 'is-invalid' : ''"
-            class="form-control"  
-            type="text"
-            placeholder="Digite o nome do contato"
-          />
-          <div class="invalid-tooltip" *ngIf="campoEstaInvalido('nome')">
-            <span>O nome precisa ser preenchido.</span>
+          <input formControlName="nome" [ngClass]="campoEstaInvalido('nome') ? 'is-invalid' : ''" class="form-control"
+            type="text" placeholder="Digite o nome do contato" />
+          <div *ngIf="campoEstaInvalido('nome')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">O nome precisa ser preenchido.</span>
           </div>
         </div>
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Email:</label>
-          <input
-            formControlName="email"
-            [ngClass]="campoEstaInvalido('email') ? 'is-invalid' : ''"
-            class="form-control"
-            type="text"
-            placeholder="Digite o email do contato"
-          />
-          <div class="invalid-tooltip" *ngIf="campoEstaInvalido('email')">
-            <span *ngIf="email?.errors?.['required']"
-              >O email precisa ser preenchido.</span
-            >
-            <span *ngIf="email?.errors?.['email']"
-              >O valor precisa ter um formato de email.</span
-            >
+          <input formControlName="email" [ngClass]="campoEstaInvalido('email') ? 'is-invalid' : ''" class="form-control"
+            type="text" placeholder="Digite o email do contato" />
+          <div *ngIf="campoEstaInvalido('email')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1" *ngIf="email?.errors?.['required']">O email precisa
+              ser preenchido.</span>
+            <span class="bg-danger rounded-2 text-light px-2 pb-1" *ngIf="email?.errors?.['email']">O valor precisa ter
+              um formato de email.</span>
           </div>
         </div>
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Telefone:</label>
-          <input
-            formControlName="telefone"
-            [ngClass]="campoEstaInvalido('telefone') ? 'is-invalid' : ''"
-            class="form-control"
-            type="text"
-            placeholder="Digite o telefone do contato"
-          />
-          <div class="invalid-tooltip" *ngIf="campoEstaInvalido('telefone')">
-            <span>O telefone precisa ser preenchido.</span>
+          <input formControlName="telefone" [ngClass]="campoEstaInvalido('telefone') ? 'is-invalid' : ''"
+            class="form-control" type="text" placeholder="Digite o telefone do contato" />
+          <div *ngIf="campoEstaInvalido('telefone')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">O telefone precisa ser preenchido.</span>
           </div>
         </div>
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Cargo:</label>
-          <input
-            formControlName="cargo"
-            [ngClass]="campoEstaInvalido('cargo') ? 'is-invalid' : ''"
-            class="form-control"
-            type="text"
-            placeholder="Digite o cargo do contato"
-          />
-          <div class="invalid-tooltip" *ngIf="campoEstaInvalido('cargo')">
-            <span>O cargo precisa ser preenchido.</span>
+          <input formControlName="cargo" [ngClass]="campoEstaInvalido('cargo') ? 'is-invalid' : ''" class="form-control"
+            type="text" placeholder="Digite o cargo do contato" />
+          <div *ngIf="campoEstaInvalido('cargo')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">O cargo precisa ser preenchido.</span>
           </div>
         </div>
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Empresa:</label>
-          <input
-            formControlName="empresa"
-            [ngClass]="campoEstaInvalido('empresa') ? 'is-invalid' : ''"
-            class="form-control"
-            type="text"
-            placeholder="Digite a empresa do contato"
-          />
-          <div class="invalid-tooltip" *ngIf="campoEstaInvalido('empresa')">
-            <span>A empresa precisa ser preenchida.</span>
+          <input formControlName="empresa" [ngClass]="campoEstaInvalido('empresa') ? 'is-invalid' : ''"
+            class="form-control" type="text" placeholder="Digite a empresa do contato" />
+          <div *ngIf="campoEstaInvalido('empresa')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">A empresa precisa ser preenchida.</span>
           </div>
         </div>
 
@@ -86,11 +59,7 @@
             <i class="bi bi-save me-2"></i>
             Gravar
           </button>
-          <button
-            routerLink="/contatos/listar"
-            type="button"
-            class="btn btn-outline-primary px-5"
-          >
+          <button routerLink="/contatos/listar" type="button" class="btn btn-outline-primary px-5">
             <i class="pi pi-arrow-left me-2"></i>
             Voltar
           </button>
