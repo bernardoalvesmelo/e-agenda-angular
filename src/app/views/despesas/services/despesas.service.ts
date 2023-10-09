@@ -2,28 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FormsCategoriaViewModel } from '../models/forms-categoria.view-model';
-import { ListarCategoriaViewModel } from '../models/listar-categoria.view-model';
-import { VisualizarCategoriaViewModel } from '../models/visualizar-categoria.view-model';
-
+import { FormsDespesaViewModel } from '../models/forms-despesa.view-model';
+import { ListarDespesaViewModel } from '../models/listar-despesa.view-model';
+import { VisualizarDespesaViewModel } from '../models/visualizar-despesa.view-model';
 
 @Injectable()
-export class CategoriasService {
+export class DespesasService {
   private endpoint: string =
-    'https://e-agenda-web-api.onrender.com/api/categorias/';
+    'https://e-agenda-web-api.onrender.com/api/despesas/';
 
   constructor(private http: HttpClient) {}
 
-  public inserir(categoria: FormsCategoriaViewModel): Observable<FormsCategoriaViewModel> {
+  public inserir(despesa: FormsDespesaViewModel): Observable<FormsDespesaViewModel> {
     return this.http.post<any>(
-      this.endpoint, categoria, this.obterHeadersAutorizacao())
+      this.endpoint, despesa, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public editar(id: string, categoria: FormsCategoriaViewModel) {
+  public editar(id: string, despesa: FormsDespesaViewModel) {
     return this.http
-      .put<any>(this.endpoint + id, categoria, this.obterHeadersAutorizacao())
+      .put<any>(this.endpoint + id, despesa, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
@@ -33,23 +32,23 @@ export class CategoriasService {
     .pipe(catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarTodos(): Observable<ListarCategoriaViewModel[]> {
+  public selecionarTodos(): Observable<ListarDespesaViewModel[]> {
     return this.http
       .get<any>(this.endpoint, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarPorId(id: string): Observable<FormsCategoriaViewModel> {
+  public selecionarPorId(id: string): Observable<FormsDespesaViewModel> {
     return this.http
       .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarCategoriaCompletaPorId(
+  public selecionarDespesaCompletaPorId(
     id: string
-  ): Observable<VisualizarCategoriaViewModel> {
+  ): Observable<VisualizarDespesaViewModel> {
     return this.http
       .get<any>(
         this.endpoint + 'visualizacao-completa/' + id,

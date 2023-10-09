@@ -13,6 +13,7 @@ import { ContatosModule } from './views/contatos/contatos.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CompromissosModule } from './views/compromissos/compromissos.module';
 
+
 @NgModule({
   // Componentes e diretivas que o Módulo Distribui
   declarations: [AppComponent],

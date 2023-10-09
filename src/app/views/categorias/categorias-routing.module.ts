@@ -19,7 +19,7 @@ const formsCategoriaResolver: ResolveFn<FormsCategoriaViewModel> = (route: Activ
 };
 
 const visualizarCategoriaResolver: ResolveFn<VisualizarCategoriaViewModel> = (route: ActivatedRouteSnapshot) => {
-  return inject(CategoriasService).selecionarCategoriaCompletoPorId(
+  return inject(CategoriasService).selecionarCategoriaCompletaPorId(
     route.paramMap.get('id')!
   );
 };
