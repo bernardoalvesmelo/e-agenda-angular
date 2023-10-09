@@ -33,8 +33,6 @@ import { CompromissosModule } from './views/compromissos/compromissos.module';
     BrowserAnimationsModule,
     CoreModule,
     DashboardModule,
-    ContatosModule,
-    CompromissosModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

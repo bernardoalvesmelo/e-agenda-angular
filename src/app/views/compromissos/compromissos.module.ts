@@ -8,6 +8,8 @@ import { InserirCompromissoComponent } from './inserir-compromisso/inserir-compr
 import { ExcluirCompromissoComponent } from './excluir-compromisso/excluir-compromisso.component';
 import { CardCompromissoComponent } from './shared/card-compromisso/card-compromisso.component';
 import { EditarCompromissoComponent } from './editar-compromisso/editar-compromisso.component';
+import { CompromissosRoutingModule } from './compromissos-routing.module';
+import { ContatosModule } from '../contatos/contatos.module';
 
 
 
@@ -22,7 +24,8 @@ import { EditarCompromissoComponent } from './editar-compromisso/editar-compromi
   imports: [
     CommonModule,
     ReactiveFormsModule, 
-    RouterModule,
+    CompromissosRoutingModule,
+    ContatosModule
   ],
   providers: [
     CompromissosService,
