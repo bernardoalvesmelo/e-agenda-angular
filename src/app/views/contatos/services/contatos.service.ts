@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, filter, map, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
@@ -27,6 +27,13 @@ export class ContatosService {
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
+  public mudarFavorito(id: string, contato: FormsContatoViewModel) {
+    return this.http
+      .put<any>(this.endpoint + 'favoritos/' + id, contato, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
+  }
+
   public excluir(id: string): Observable<any> {
     return this.http.delete(this.endpoint + id, this.obterHeadersAutorizacao())
     .pipe(catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
@@ -36,6 +43,14 @@ export class ContatosService {
     return this.http
       .get<any>(this.endpoint, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
+  }
+
+  public selecionarTodosFavoritos(): Observable<ListarContatoViewModel[]> {
+    return this.http
+      .get<any>(this.endpoint, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      map((res) => [...res].filter(c => c.favorito)),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 

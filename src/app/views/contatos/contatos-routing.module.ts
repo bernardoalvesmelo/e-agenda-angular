@@ -8,6 +8,7 @@ import { FormsContatoViewModel } from "./models/forms-contato.view-model";
 import { ListarContatoViewModel } from "./models/listar-contato.view-model";
 import { VisualizarContatoViewModel } from "./models/visualizar-contato.view-model";
 import { ContatosService } from "./services/contatos.service";
+import { DetalhesContatoComponent } from "./detalhes-contato/detalhes-contato.component";
 
 const listarContatosResolver: ResolveFn<ListarContatoViewModel[]> = () => {
   return inject(ContatosService).selecionarTodos();
@@ -46,6 +47,11 @@ const routes: Routes = [
   {
     path: 'excluir/:id',
     component: ExcluirContatoComponent,
+    resolve: {contato: visualizarContatoResolver}
+  },
+  {
+    path: 'detalhes/:id',
+    component: DetalhesContatoComponent,
     resolve: {contato: visualizarContatoResolver}
   },
 ]

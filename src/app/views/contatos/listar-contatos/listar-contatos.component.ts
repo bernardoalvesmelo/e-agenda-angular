@@ -3,6 +3,8 @@ import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs';
+import { ContatosService } from '../services/contatos.service';
+import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 
 @Component({
   selector: 'app-listar-contatos',
@@ -11,12 +13,15 @@ import { map } from 'rxjs';
 })
 export class ListarContatosComponent implements OnInit {
   contatos: ListarContatoViewModel[];
+  tipoListagem: 'favoritos' | 'todos';
 
   constructor(
     private route: ActivatedRoute,
+    private contatosService: ContatosService,
     private toastService: ToastrService,  
   ) {
     this.contatos = [];
+    this.tipoListagem = 'todos';
   }
 
   ngOnInit(): void {
@@ -24,6 +29,54 @@ export class ListarContatosComponent implements OnInit {
       next: (res: ListarContatoViewModel[]) => this.contatos = res,
       error: (err: Error) => this.processarFalha(err)
     });
+  }
+
+  mudarFavorito(contato: ListarContatoViewModel) {
+    this.contatosService.selecionarPorId(contato.id).subscribe(res => {
+      res.favorito = contato.favorito;
+      this.contatosService.mudarFavorito(contato.id, res).subscribe(res  => {
+        this.atualizarFavoritos(res);
+      })
+    })
+  }
+
+  atualizarFavoritos(contato: FormsContatoViewModel) {
+    if(this.tipoListagem == 'todos') {
+      this.selecionarTodos();
+      this.toastService.success(`Contato ${contato.nome} favoritado!`);
+    }
+
+    else if(this.tipoListagem == 'favoritos') {
+      this.selecionarFavoritos();
+      this.toastService.success(`Contato ${contato.nome} desfavoritado!`);
+    }
+  }
+
+  selecionarTodos() {
+    this.contatosService.selecionarTodos().subscribe(res => {
+      this.contatos = res;
+      console.log(res);
+      this.tipoListagem = 'todos';
+    });
+  }
+
+  selecionarFavoritos() {
+    this.contatos = [];
+    this.contatosService.selecionarTodosFavoritos().subscribe(res => {
+      this.contatos = res;
+      this.tipoListagem = 'favoritos';
+    })
+  }
+
+  mudarListagem(tipo: 'favoritos' | 'todos') {
+    this.tipoListagem = tipo;
+    if(this.tipoListagem == 'todos') {
+      this.selecionarTodos();
+    }
+
+    else if(this.tipoListagem == 'favoritos') {
+      this.selecionarFavoritos();
+    }
   }
 
   processarFalha(erro: Error) {

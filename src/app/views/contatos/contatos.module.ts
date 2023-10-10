@@ -11,13 +11,14 @@ import { CardContatoComponent } from './shared/card-contato/card-contato.compone
 
 import 'src/app/extensions/form-group.extension';
 import { ContatosRoutingModule } from './contatos-routing.module';
+import { DetalhesContatoComponent } from './detalhes-contato/detalhes-contato.component';
 
 @NgModule({
   declarations: [InserirContatoComponent, 
     ListarContatosComponent, 
     EditarContatoComponent, 
     ExcluirContatoComponent, 
-    CardContatoComponent],
+    CardContatoComponent, DetalhesContatoComponent],
   imports: [CommonModule, 
     ReactiveFormsModule, 
     ContatosRoutingModule],

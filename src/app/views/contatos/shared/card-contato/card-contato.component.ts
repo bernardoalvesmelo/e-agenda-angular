@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ListarContatoViewModel } from '../../models/listar-contato.view-model';
 
 @Component({
@@ -9,6 +9,8 @@ import { ListarContatoViewModel } from '../../models/listar-contato.view-model';
 export class CardContatoComponent {
   @Input({required: true}) contato: ListarContatoViewModel;
 
+  @Output() onfavoritoSelecionado: EventEmitter<ListarContatoViewModel>;
+
   constructor() {
     this.contato = new ListarContatoViewModel(
       '', 
@@ -17,5 +19,12 @@ export class CardContatoComponent {
       '', 
       ''
     );
+
+    this.onfavoritoSelecionado = new EventEmitter();
   }
+
+    mudarFavorito() {
+      this.contato.favorito = !this.contato.favorito;
+      this.onfavoritoSelecionado.emit(this.contato);
+    }
 }

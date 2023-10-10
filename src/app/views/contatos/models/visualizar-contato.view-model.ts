@@ -1,3 +1,5 @@
+import { ListarCompromissoViewModel } from "../../compromissos/models/listar-compromisso.view-model";
+
 export class VisualizarContatoViewModel {
     id: string;
     nome: string;
@@ -5,6 +7,7 @@ export class VisualizarContatoViewModel {
     telefone: string;
     cargo: string;
     empresa: string;
+    compromissos: ListarCompromissoViewModel[];
   
     constructor(
       id: string,
@@ -12,7 +15,8 @@ export class VisualizarContatoViewModel {
       email: string,
       telefone: string,
       cargo: string,
-      empresa: string
+      empresa: string,
+      compromissos?: ListarCompromissoViewModel[],
     ) {
       this.id = id;
       this.nome = nome;
@@ -20,6 +24,8 @@ export class VisualizarContatoViewModel {
       this.telefone = telefone;
       this.cargo = cargo;
       this.empresa = empresa;
+
+      this.compromissos = compromissos ?? [];
     }
   }
   
