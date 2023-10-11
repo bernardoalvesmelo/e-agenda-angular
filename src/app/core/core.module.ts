@@ -6,7 +6,10 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [NavbarComponent],
-  imports: [CommonModule, RouterModule, NgbCollapseModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    NgbCollapseModule],
   exports: [NavbarComponent],
 })
 export class CoreModule {}

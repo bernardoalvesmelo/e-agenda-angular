@@ -68,6 +68,15 @@ export class InserirDespesaComponent {
       return;
     }
 
+    this.despesaVM = this.obterValorForm();
+
+    this.despesaService.inserir(this.despesaVM).subscribe({
+      next: (res: FormsDespesaViewModel) => this.processarSucesso(res),
+      error: (err: Error) => this.processarFalha(err)
+    });
+  }
+
+  obterValorForm(): FormsDespesaViewModel {
     const valorForm = this.form.value;
 
     const categoriasForm: any[] = valorForm.categoriasSelecionadas;
@@ -83,13 +92,7 @@ export class InserirDespesaComponent {
       categoriasSelecionadas: categorias ?? [],
     }
 
-
-    this.despesaVM = novaDespesa;
-
-    this.despesaService.inserir(this.despesaVM).subscribe({
-      next: (res: FormsDespesaViewModel) => this.processarSucesso(res),
-      error: (err: Error) => this.processarFalha(err)
-    });
+    return novaDespesa;
   }
 
   processarSucesso(despesa: FormsDespesaViewModel) {

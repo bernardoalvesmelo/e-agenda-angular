@@ -42,30 +42,35 @@ export class EditarDespesaComponent {
 
     if (!this.idSelecionado) return;
 
-    const fb = this.formBuilder;
-
     this.route.data.pipe(map(res => res['despesa'])).subscribe({
-      next: (res: FormsDespesaViewModel) => {
-        this.form.patchValue({
-          descricao: res.descricao ?? '',
-          valor: res.valor ?? 0,
-          data: res.data ?? new Date(),
-          formaPagamento: res.formaPagamento ?? 0,
-        });
-        this.despesaVM = res;
-        this.form.get('data')?.setValue(res.data.toString().substring(0, 10));
-
-        this.route.data.pipe(map(res => res['categorias'])).subscribe({
-          next: (res: ListarCategoriaViewModel[]) => {
-            this.categorias = res;
-            this.popularOpcoes();
-        },
-          error: (err: Error) => this.processarFalha(err)
-        });
-      },
+      next: (res: FormsDespesaViewModel) => this.selecionarConteudo(res),
       error: (err: Error) => this.processarFalha(err)
     });
 
+  }
+
+  selecionarConteudo(res: FormsDespesaViewModel) {
+    this.form.patchValue({
+      descricao: res.descricao ?? '',
+      valor: res.valor ?? 0,
+      data: res.data ?? new Date(),
+      formaPagamento: res.formaPagamento ?? 0,
+    });
+
+    this.despesaVM = res;
+    this.form.get('data')?.setValue(res.data.toString().substring(0, 10));
+
+    this.selecionarCategorias();
+  }
+
+  selecionarCategorias() {
+    this.route.data.pipe(map(res => res['categorias'])).subscribe({
+      next: (res: ListarCategoriaViewModel[]) => {
+        this.categorias = res;
+        this.popularOpcoes();
+    },
+      error: (err: Error) => this.processarFalha(err)
+    });
   }
 
   popularOpcoes() {
@@ -94,6 +99,15 @@ export class EditarDespesaComponent {
       return;
     }
 
+    this.despesaVM = this.obterValorForm();
+
+    this.despesaService.editar(this.idSelecionado, this.despesaVM).subscribe({
+      next: (res: FormsDespesaViewModel) => this.processarSucesso(res),
+      error: (err: Error) => this.processarFalha(err)
+    });
+  }
+
+  obterValorForm(): FormsDespesaViewModel {
     const valorForm = this.form.value;
 
     const categoriasForm: any[] = valorForm.categoriasSelecionadas;
@@ -109,13 +123,7 @@ export class EditarDespesaComponent {
       categoriasSelecionadas: categorias ?? [],
     }
 
-
-    this.despesaVM = novaDespesa;
-
-    this.despesaService.editar(this.idSelecionado, this.despesaVM).subscribe({
-      next: (res: FormsDespesaViewModel) => this.processarSucesso(res),
-      error: (err: Error) => this.processarFalha(err)
-    });
+    return novaDespesa;
   }
 
   processarSucesso(despesa: FormsDespesaViewModel) {

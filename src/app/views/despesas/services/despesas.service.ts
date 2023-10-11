@@ -40,6 +40,20 @@ export class DespesasService {
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
+  public selecionarDespesasAntigas(): Observable<ListarDespesaViewModel[]> {
+    return this.http
+      .get<any>(this.endpoint + 'antigas', this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
+  }
+
+  public selecionarDespesasDoMes(): Observable<ListarDespesaViewModel[]> {
+    return this.http
+      .get<any>(this.endpoint + 'ultimos-30-dias', this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados),
+      catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
+  }
+
   public selecionarPorId(id: string): Observable<FormsDespesaViewModel> {
     return this.http
       .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())

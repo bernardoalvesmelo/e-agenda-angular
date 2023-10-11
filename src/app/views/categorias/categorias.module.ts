@@ -10,6 +10,7 @@ import { CategoriasRoutingModule } from './categorias-routing.module';
 import { CategoriasService } from './services/categorias.service';
 
 import 'src/app/extensions/form-group.extension';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import 'src/app/extensions/form-group.extension';
   ],
   imports: [
     CommonModule, 
+    NgbModule,
     ReactiveFormsModule, 
     CategoriasRoutingModule
   ],

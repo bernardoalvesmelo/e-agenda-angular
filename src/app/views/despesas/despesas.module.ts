@@ -9,8 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CategoriasModule } from '../categorias/categorias.module';
 import { DespesasService } from './services/despesas.service';
 import { DespesasRoutingModule } from './despesas-routing.module';
+import { DetalhesDespesaComponent } from './despesa-detalhes/detalhes-despesa.component';
 
 import 'src/app/extensions/form-group.extension';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @NgModule({
   declarations: [
@@ -18,10 +22,12 @@ import 'src/app/extensions/form-group.extension';
     ListarDespesasComponent,
     EditarDespesaComponent,
     ExcluirDespesaComponent,
-    InserirDespesaComponent
+    InserirDespesaComponent,
+    DetalhesDespesaComponent
   ],
   imports: [
     CommonModule,
+    NgbModule,
     ReactiveFormsModule, 
     DespesasRoutingModule,
     CategoriasModule

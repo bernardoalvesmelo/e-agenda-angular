@@ -12,6 +12,7 @@ import { CardContatoComponent } from './shared/card-contato/card-contato.compone
 import 'src/app/extensions/form-group.extension';
 import { ContatosRoutingModule } from './contatos-routing.module';
 import { DetalhesContatoComponent } from './detalhes-contato/detalhes-contato.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [InserirContatoComponent, 
@@ -19,8 +20,10 @@ import { DetalhesContatoComponent } from './detalhes-contato/detalhes-contato.co
     EditarContatoComponent, 
     ExcluirContatoComponent, 
     CardContatoComponent, DetalhesContatoComponent],
-  imports: [CommonModule, 
-    ReactiveFormsModule, 
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    NgbModule, 
     ContatosRoutingModule],
   providers: [ContatosService],
 })

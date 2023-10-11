@@ -52,22 +52,6 @@ export class ListarContatosComponent implements OnInit {
     }
   }
 
-  selecionarTodos() {
-    this.contatosService.selecionarTodos().subscribe(res => {
-      this.contatos = res;
-      console.log(res);
-      this.tipoListagem = 'todos';
-    });
-  }
-
-  selecionarFavoritos() {
-    this.contatos = [];
-    this.contatosService.selecionarTodosFavoritos().subscribe(res => {
-      this.contatos = res;
-      this.tipoListagem = 'favoritos';
-    })
-  }
-
   mudarListagem(tipo: 'favoritos' | 'todos') {
     this.tipoListagem = tipo;
     if(this.tipoListagem == 'todos') {
@@ -77,6 +61,27 @@ export class ListarContatosComponent implements OnInit {
     else if(this.tipoListagem == 'favoritos') {
       this.selecionarFavoritos();
     }
+  }
+
+  selecionarTodos() {
+    this.contatosService.selecionarTodos().subscribe({
+      next: (res: ListarContatoViewModel[]) =>{
+         this.contatos = res;
+        this.tipoListagem = 'todos';
+      },
+      error: (erro: Error) => this.processarFalha(erro)
+    });
+  }
+
+  selecionarFavoritos() {
+    this.contatos = [];
+    this.contatosService.selecionarTodosFavoritos().subscribe({
+      next: (res: ListarContatoViewModel[]) =>{
+         this.contatos = res;
+        this.tipoListagem = 'favoritos';
+      },
+      error: (erro: Error) => this.processarFalha(erro)
+    });
   }
 
   processarFalha(erro: Error) {

@@ -10,6 +10,7 @@ import { FormsDespesaViewModel } from "./models/forms-despesa.view-model";
 import { ListarDespesaViewModel } from "./models/listar-despesa.view-model";
 import { VisualizarDespesaViewModel } from "./models/visualizar-despesa.view-model";
 import { DespesasService } from "./services/despesas.service";
+import { DetalhesDespesaComponent } from "./despesa-detalhes/detalhes-despesa.component";
 
 const listarCategoriasResolver: ResolveFn<ListarCategoriaViewModel[]> = () => {
   return inject(CategoriasService).selecionarTodos();
@@ -54,6 +55,11 @@ const routes: Routes = [
   {
     path: 'excluir/:id',
     component: ExcluirDespesaComponent,
+    resolve: {despesa: visualizarDespesaResolver}
+  },
+  {
+    path: 'detalhes/:id',
+    component: DetalhesDespesaComponent,
     resolve: {despesa: visualizarDespesaResolver}
   },
 ];

@@ -12,6 +12,7 @@ import { CompromissosRoutingModule } from './compromissos-routing.module';
 import { ContatosModule } from '../contatos/contatos.module';
 
 import 'src/app/extensions/form-group.extension';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import 'src/app/extensions/form-group.extension';
   imports: [
     CommonModule,
     ReactiveFormsModule, 
+    NgbModule,
     CompromissosRoutingModule,
     ContatosModule
   ],
