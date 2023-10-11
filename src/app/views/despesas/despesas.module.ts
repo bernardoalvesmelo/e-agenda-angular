@@ -7,10 +7,10 @@ import { ExcluirDespesaComponent } from './excluir-despesa/excluir-despesa.compo
 import { InserirDespesaComponent } from './inserir-despesa/inserir-despesa.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoriasModule } from '../categorias/categorias.module';
-import { CompromissosRoutingModule } from '../compromissos/compromissos-routing.module';
 import { DespesasService } from './services/despesas.service';
+import { DespesasRoutingModule } from './despesas-routing.module';
 
-
+import 'src/app/extensions/form-group.extension';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { DespesasService } from './services/despesas.service';
   imports: [
     CommonModule,
     ReactiveFormsModule, 
-    CompromissosRoutingModule,
+    DespesasRoutingModule,
     CategoriasModule
   ],
   providers: [

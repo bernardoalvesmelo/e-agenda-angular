@@ -11,6 +11,7 @@ import { EditarCompromissoComponent } from './editar-compromisso/editar-compromi
 import { CompromissosRoutingModule } from './compromissos-routing.module';
 import { ContatosModule } from '../contatos/contatos.module';
 
+import 'src/app/extensions/form-group.extension';
 
 
 @NgModule({

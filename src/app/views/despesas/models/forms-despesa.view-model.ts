@@ -6,14 +6,14 @@ export class FormsDespesaViewModel {
   valor: number;
   data: Date;
   formaPagamento: TipoPagamento;
-  categoriasSelecionadas: ListarCategoriaViewModel[];
+  categoriasSelecionadas: string[];
 
   constructor(
     descricao: string,
     valor: number,
     data: Date,
     formaPagamento: TipoPagamento,
-    categoriasSelecionadas?: ListarCategoriaViewModel[]
+    categoriasSelecionadas?: string[]
     
   ) {
     this.descricao = descricao;

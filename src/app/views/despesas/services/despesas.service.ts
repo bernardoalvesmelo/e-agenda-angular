@@ -14,6 +14,7 @@ export class DespesasService {
   constructor(private http: HttpClient) {}
 
   public inserir(despesa: FormsDespesaViewModel): Observable<FormsDespesaViewModel> {
+    console.log(despesa);
     return this.http.post<any>(
       this.endpoint, despesa, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
