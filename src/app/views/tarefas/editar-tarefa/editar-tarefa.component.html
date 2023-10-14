@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
+      <div class="text-md-start">
+        <h1 class="fw-bold text-primary">Editar Tarefa</h1>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="gravar()" class="mt-4">
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Título:</label>
+          <input formControlName="titulo" [ngClass]="campoEstaInvalido('titulo') ? 'is-invalid' : ''"
+            class="form-control" type="text" placeholder="Digite o título da tarefa" />
+          <div *ngIf="campoEstaInvalido('titulo')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">O título precisa ser preenchido.</span>
+          </div>
+        </div>
+
+        <div class="form-group mb-3 position-relative">
+          <label class="form-label">Prioridade da Tarefa:</label>
+
+          <div class="d-flex align-items-center gap-2">
+            <input [ngClass]="campoEstaInvalido('prioridade') ? 'is-invalid' : ''" formControlName="prioridade"
+              name="prioridade" type="radio" [value]="0" />
+            Baixa
+
+            <input [ngClass]="campoEstaInvalido('prioridade') ? 'is-invalid' : ''" formControlName="prioridade"
+              name="prioridade" type="radio" [value]="1" />
+            Normal
+
+            <input [ngClass]="campoEstaInvalido('prioridade') ? 'is-invalid' : ''" formControlName="prioridade"
+              name="prioridade" type="radio" [value]="2" />
+            Alta
+          </div>
+          <div *ngIf="campoEstaInvalido('prioridade')">
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">O grau de prioridade precisa ser preenchido.</span>
+          </div>
+        </div>
+
+        <div class="text-md-start">
+          <h3 class="fw-bold text-dark my-2">Itens: </h3>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2" formArrayName="itens">
+          <div *ngFor="let item of form.get('itens')?.value; let i = index"
+          [formGroupName]="i" class="bg-light border rounded-pill p-2">
+            <label>
+              <input type="checkbox" formControlName="selected"> {{ item.name }}
+            </label>
+          </div>
+        </div>
+
+        <div class="text-md-start">
+          <h3 class="fw-bold text-primary">Inserir Novo Item</h3>
+        </div>
+  
+        <form [formGroup]="formItem" class="mt-4">
+          <div class="form-group mb-3 position-relative">
+            <div class="d-flex flex-wrap">
+            <label class="form-label">Título:</label>
+            <input formControlName="titulo" [ngClass]="campoEstaInvalidoItem('titulo') ? 'is-invalid' : ''"
+              class="form-control" type="text" placeholder="Digite o título do item" />
+            <button (click)="adicionarItem()" type="button" class="btn btn-primary px-5 my-1">
+                <i class="bi bi-save me-2"></i>
+                Adicionar Item
+            </button>
+            </div>
+            <div *ngIf="campoEstaInvalido('titulo')">
+              <span class="bg-danger rounded-2 text-light px-2 pb-1">O título precisa ser preenchido.</span>
+            </div>
+          </div>
+        </form>
+  
+
+        <div class="card-footer g-grid d-flex gap-1 mt-5 mb-1">
+          <button data-cy="btnGravar" type="submit" class="btn btn-primary px-5">
+            <i class="bi bi-save me-2"></i>
+            Gravar
+          </button>
+          <button routerLink="/tarefas/listar" type="button" class="btn btn-outline-primary px-5">
+            <i class="pi pi-arrow-left me-2"></i>
+            Voltar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -54,16 +54,13 @@
           </div>
         </div>
 
-
-
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Categorias:</label>
-        
         </div>
 
-        <div *ngIf="categorias.length > 0" formArrayName="categoriasSelecionadas">
+        <div class="d-flex flex-wrap gap-2" *ngIf="categorias.length > 0" formArrayName="categoriasSelecionadas">
           <div *ngFor="let categoria of form.get('categoriasSelecionadas')?.value; let i = index"
-          [formGroupName]="i" class="border-bottom p-2 my-2">
+          [formGroupName]="i" class="bg-light border rounded-pill p-2">
             <label>
               <input type="checkbox" formControlName="selected"> {{ categoria.name }}
             </label>

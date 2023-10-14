@@ -4,15 +4,19 @@
     <div class="col-12 col-md-10 col-lg-9 mx-auto mt-5">
       <!-- Titulo -->
       <div class="text-md-start">
-        <h1 class="fw-bold text-primary">Listar Despesas</h1>
+        <h1 class="fw-bold text-primary">Listar Tarefas</h1>
         <hr />
       </div>
 
       <!-- Barra de Ações -->
       <div class="d-grid d-md-flex gap-1 mt-3">
-        <a [routerLink]="['/despesas/inserir']" role="button" class="btn btn-primary me-md-1">
+        <a
+          [routerLink]="['/tarefas/inserir']"
+          role="button"
+          class="btn btn-primary me-md-1"
+        >
           <i class="pi bi-plus-circle me-2"></i>
-          Nova Despesa
+          Nova Tarefa
         </a>
       </div>
 
@@ -21,24 +25,26 @@
           (click)="mudarListagem('todos')">
           Todas
         </button>
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar despesas antigas" placement="bottom"
-          (click)="mudarListagem('antigas')">
-          Antigas
+        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar tarefas pendentes" placement="bottom"
+          (click)="mudarListagem('pendentes')">
+          Pendentes
         </button>
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar despesas dos últimos 30 dias" placement="bottom"
-          (click)="mudarListagem('mes')">
-          Últimos 30 Dias
+        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar tarefas concluídas" placement="bottom"
+          (click)="mudarListagem('concluidos')">
+          Concluídas
         </button>
       </div>
 
       <!-- Listagem de Registros -->
       <div class="mt-3 mb-1">
         <div class="row g-3">
-          <div *ngFor="let despesa of despesas" class="col-sm col-md-6 col-lg-4">
-            <app-card-despesa [despesa]="despesa"></app-card-despesa>
+          <div *ngFor="let tarefa of tarefas" class="col-sm col-md-6 col-lg-4">
+            <app-card-tarefa
+              [tarefa]="tarefa"
+            ></app-card-tarefa>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> 

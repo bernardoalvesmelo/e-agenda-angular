@@ -1,80 +1,74 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, filter, map, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FormsCompromissoViewModel } from '../models/forms-compromisso.view-model';
-import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
-import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
-
-import 'src/app/extensions/form-group.extension';
+import { FormsTarefaViewModel } from '../models/tarefa/forms-tarefa.view-model';
+import { ListarTarefaViewModel } from '../models/tarefa/listar-tarefa.view-model';
+import { VisualizarTarefaViewModel } from '../models/tarefa/visualizar-tarefa.view-model';
+import { isNgTemplate } from '@angular/compiler';
+import { FormsCompletoTarefaViewModel } from '../models/tarefa/forms-completo-tarefa.view-model';
 
 
 @Injectable()
-export class CompromissosService {
+export class TarefasService {
   private endpoint: string =
-    'https://e-agenda-web-api.onrender.com/api/compromissos/';
+    'https://e-agenda-web-api.onrender.com/api/tarefas/';
 
   constructor(private http: HttpClient) {}
 
-  public inserir(compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel> {
+  public inserir(tarefa: FormsTarefaViewModel): Observable<FormsTarefaViewModel> {
     return this.http.post<any>(
-      this.endpoint, compromisso, this.obterHeadersAutorizacao())
+      this.endpoint, tarefa, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public editar(id: string, compromisso: FormsCompromissoViewModel) {
+  public editar(id: string, tarefa: FormsCompletoTarefaViewModel) {
     return this.http
-      .put<any>(this.endpoint + id, compromisso, this.obterHeadersAutorizacao())
+      .put<any>(this.endpoint + id, tarefa, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public excluir(id: string): Observable<any> {
     return this.http.delete(this.endpoint + id, this.obterHeadersAutorizacao())
-    .pipe(catchError((err: HttpErrorResponse) => this.processarErroHttp(err)))
+    .pipe(catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarTodos(): Observable<ListarCompromissoViewModel[]> {
+  public selecionarTodos(): Observable<ListarTarefaViewModel[]> {
     return this.http
       .get<any>(this.endpoint, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarCompromissosPassados(): Observable<ListarCompromissoViewModel[]> {
+  public selecionarTarefasPendentes(): Observable<ListarTarefaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint + 'passados/' + new Date(Date.now()).toDateString().replaceAll('/','-'), 
-      this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
+      map(dados => [...dados].filter(d => d.situacao == 'Pendente')),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarCompromissosDeHoje(): Observable<ListarCompromissoViewModel[]> {
-    return this.http.get<any>(this.endpoint + 'hoje', this.obterHeadersAutorizacao())
-    .pipe(map((res) => res.dados),
-    catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
-  }
-
-  public selecionarCompromissosFuturos(): Observable<ListarCompromissoViewModel[]> {
+  public selecionarTarefasConcluidas(): Observable<ListarTarefaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint + `futuros/${new Date(Date.now()).toDateString().replaceAll('/','-')}` +
-      `=${new Date('12/12/2222').toDateString().replaceAll('/','-')}`, 
-      this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
+      map(dados => [...dados].filter(d => d.situacao == 'Concluído')),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
-
-  public selecionarPorId(id: string): Observable<FormsCompromissoViewModel> {
+  
+  public selecionarPorId(id: string): Observable<FormsTarefaViewModel> {
     return this.http
       .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())
-      .pipe(map((res) => res.dados),
+      .pipe(tap(res => console.log(res)),
+      map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
-  public selecionarCompromissoCompletoPorId(
+  public selecionarTarefaCompletoPorId(
     id: string
-  ): Observable<VisualizarCompromissoViewModel> {
+  ): Observable<VisualizarTarefaViewModel> {
     return this.http
       .get<any>(
         this.endpoint + 'visualizacao-completa/' + id,

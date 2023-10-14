@@ -19,6 +19,25 @@
             Novo Compromisso
           </a>
         </div>
+
+        <div class="d-flex flex-wrap gap-2 my-2">
+          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar todos" placement="bottom"
+           (click)="mudarListagem('todos')">
+            Todos
+          </button>
+          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar compromissos passados" placement="bottom"
+           (click)="mudarListagem('passados')">
+            Passados
+          </button>
+          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar compromissos do dia atual" placement="bottom"
+           (click)="mudarListagem('hoje')">
+            Hoje
+          </button>
+          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar compromissos futuros" placement="bottom"
+           (click)="mudarListagem('futuros')">
+            Futuros
+          </button>
+          </div>
   
         <!-- Listagem de Registros -->
         <div class="mt-3 mb-1">
