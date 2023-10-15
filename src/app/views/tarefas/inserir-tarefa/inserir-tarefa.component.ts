@@ -5,7 +5,6 @@ import { FormsTarefaViewModel } from '../models/tarefa/forms-tarefa.view-model';
 import { TarefasService } from '../services/tarefas.service';
 import { Router } from '@angular/router';
 import { FormsItemTarefaViewModel } from '../models/Item-tarefa/forms-item-tarefa.view-model';
-import { Form } from 'react-router-dom';
 
 @Component({
   selector: 'app-inserir-tarefa',
