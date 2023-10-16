@@ -11,7 +11,9 @@
           <input formControlName="titulo" [ngClass]="campoEstaInvalido('titulo') ? 'is-invalid' : ''"
             class="form-control" type="text" placeholder="Digite o título da tarefa" />
           <div *ngIf="campoEstaInvalido('titulo')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">O título precisa ser preenchido.</span>
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">
+              O título precisa ser preenchido com no mínimo 3 caracteres.
+            </span>
           </div>
         </div>
 

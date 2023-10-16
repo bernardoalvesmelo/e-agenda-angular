@@ -25,7 +25,7 @@ export class InserirTarefaComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      titulo: new FormControl('', [Validators.required]),
+      titulo: new FormControl('', [Validators.required, Validators.minLength(3)]),
       prioridade: new FormControl(0, [Validators.required]),
       itens: this.formBuilder.array([]),
     });

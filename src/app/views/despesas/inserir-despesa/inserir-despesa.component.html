@@ -11,16 +11,20 @@
           <input formControlName="descricao" [ngClass]="campoEstaInvalido('descricao') ? 'is-invalid' : ''"
             class="form-control" type="text" placeholder="Digite a descrição da despesa" />
           <div *ngIf="campoEstaInvalido('descricao')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">A descrição precisa ser preenchida.</span>
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">
+              A descrição precisa ser preenchida com no minímo 3 caracteres.
+            </span>
           </div>
         </div>
 
         <div class="form-group mb-3 position-relative">
-          <label class="form-label">Valor:</label>
+          <label class="form-label">Valor R$:</label>
           <input formControlName="valor" [ngClass]="campoEstaInvalido('valor') ? 'is-invalid' : ''"
             class="form-control" type="number" placeholder="Digite o valor da despesa" />
           <div *ngIf="campoEstaInvalido('valor')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">O valor precisa ser preenchido.</span>
+            <span class="bg-danger rounded-2 text-light px-2 pb-1">
+              O valor precisa ser preenchido com no mínimo 0.1 reais.
+            </span>
           </div>
         </div>
 
@@ -43,7 +47,7 @@
 
             <input [ngClass]="campoEstaInvalido('formaPagamento') ? 'is-invalid' : ''" formControlName="formaPagamento"
               name="formaPagamento" type="radio" [value]="1" />
-            A Vista
+            À Vista
 
             <input [ngClass]="campoEstaInvalido('formaPagamento') ? 'is-invalid' : ''" formControlName="formaPagamento"
               name="formaPagamento" type="radio" [value]="2" />

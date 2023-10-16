@@ -27,7 +27,7 @@ export class InserirCompromissoComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      assunto: new FormControl('', [Validators.required]),
+      assunto: new FormControl('', [Validators.required, Validators.minLength(3)]),
       local: new FormControl('', [Validators.required]),
       tipoLocal: new FormControl('', [Validators.required]),
       link: new FormControl('', [Validators.required]),

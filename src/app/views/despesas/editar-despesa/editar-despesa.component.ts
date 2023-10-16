@@ -31,8 +31,8 @@ export class EditarDespesaComponent {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      descricao: new FormControl('', [Validators.required]),
-      valor: new FormControl('', [Validators.required]),
+      descricao: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      valor: new FormControl('', [Validators.required, Validators.min(0.1)]),
       data: new FormControl(new Date(), [Validators.required]),
       formaPagamento: new FormControl('', [Validators.required]),
       categoriasSelecionadas: this.formBuilder.array([]),
