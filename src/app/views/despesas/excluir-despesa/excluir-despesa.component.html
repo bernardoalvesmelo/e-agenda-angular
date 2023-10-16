@@ -38,9 +38,9 @@
           despesaVM.formaPagamento == 0 ? 'Pix' : despesaVM.formaPagamento == 1 ? 'A vista' : 'Cartão de Crédito' 
         }}</dd>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Categorias:</label>
-        </div>
+        <dt class="col-12">
+          <label class="control-label">Categorias:</label>
+        </dt>
 
         <dl *ngFor="let categoria of despesaVM.categorias"
           class="form-group mt-2 d-flex flex-wrap rounded-3 align-items-center">

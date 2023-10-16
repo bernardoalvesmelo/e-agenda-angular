@@ -51,6 +51,9 @@
         </dt>
         <dd class="col-md-8">{{ tarefaVM.situacao }}</dd>
 
+        <dt class="col-12">
+          <label class="control-label">Itens:</label>
+        </dt>
         <dl *ngFor="let item of tarefaVM.itens"
           class="form-group mt-2 d-flex flex-wrap rounded-3 align-items-center">
           <dt class="border-bottom">
