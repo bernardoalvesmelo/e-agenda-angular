@@ -14,12 +14,11 @@ export class RegistroComponent implements OnInit{
   form?: FormGroup;
 
   constructor(
-    private authService: AuthService,
     private formBuilder: FormBuilder,
+    private authService: AuthService,
     private toastService: ToastrService,
-    private router: Router) {
-
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -27,15 +26,14 @@ export class RegistroComponent implements OnInit{
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]],
       confirmarSenha: ['', [Validators.required, Validators.minLength(6)]],
-
-    })
+    });
   }
 
   campoEstaInvalido(nome: string) {
     return this.form!.get(nome)!.touched && this.form!.get(nome)!.invalid;
   }
 
-  gravar() {
+  registrar() {
     if (this.form?.invalid) {
       for (let erro of this.form.validate()) {
         this.toastService.warning(erro);
@@ -44,14 +42,14 @@ export class RegistroComponent implements OnInit{
       return;
     }
 
-    this.authService.registrar(this.form!.value).subscribe({
+    this.authService.registrar(this.form?.value).subscribe({
       next: (res) => this.processarSucesso(res),
-      error: (err) => this.processarFalha(err) 
-    })    
+      error: (err) => this.processarFalha(err),
+    });
   }
 
   processarSucesso(res: TokenViewModel) {
-    this.toastService.success('Seja bem-vindo' + res.usuarioToken.nome + '!', 
+    this.toastService.success('Seja bem-vindo ' + res.usuarioToken.nome + '!', 
     'Sucesso')
 
     this.router.navigate(['dashboard']);
