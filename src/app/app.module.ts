@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ContatosModule } from './views/contatos/contatos.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CompromissosModule } from './views/compromissos/compromissos.module';
+import { RegistroModule } from './views/registro/registro.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { CompromissosModule } from './views/compromissos/compromissos.module';
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
+    RegistroModule,
     DashboardModule,
   ],
   providers: [],
