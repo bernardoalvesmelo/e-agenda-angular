@@ -38,6 +38,7 @@
           <div *ngFor="let contato of contatos" class="col-sm col-md-6 col-lg-4">
             <app-card-contato
               [contato]="contato"
+              (onfavoritoSelecionado)="mudarFavorito($event)"
             ></app-card-contato>
           </div>
         </div>
