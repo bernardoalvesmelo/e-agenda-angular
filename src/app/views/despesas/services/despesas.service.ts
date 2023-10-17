@@ -5,13 +5,16 @@ import { environment } from 'src/environments/environment';
 import { FormsDespesaViewModel } from '../models/forms-despesa.view-model';
 import { ListarDespesaViewModel } from '../models/listar-despesa.view-model';
 import { VisualizarDespesaViewModel } from '../models/visualizar-despesa.view-model';
+import { LocalStorageService } from 'src/app/core/auth/services/local-store.service';
 
 @Injectable()
 export class DespesasService {
   private endpoint: string =
     'https://e-agenda-web-api.onrender.com/api/despesas/';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private localStorageService: LocalStorageService,
+    private http: HttpClient) {}
 
   public inserir(despesa: FormsDespesaViewModel): Observable<FormsDespesaViewModel> {
     console.log(despesa);
@@ -91,7 +94,8 @@ export class DespesasService {
   }
 
   private obterHeadersAutorizacao() {
-    const token = environment.apiKey;
+    const token = this.localStorageService
+      .obterDadosLocaisSalvos()?.chave;
 
     return {
       headers: new HttpHeaders({
