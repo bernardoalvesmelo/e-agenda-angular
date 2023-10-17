@@ -31,7 +31,7 @@ export class EditarCompromissoComponent {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       assunto: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      local: new FormControl('', [Validators.required]),
+      local: new FormControl(''),
       tipoLocal: new FormControl('', [Validators.required]),
       link: new FormControl('', [Validators.required]),
       data: new FormControl(new Date(), [Validators.required]),

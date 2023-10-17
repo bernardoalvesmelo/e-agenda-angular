@@ -60,8 +60,11 @@ export class CompromissosService {
   }
 
   public selecionarCompromissosFuturos(): Observable<ListarCompromissoViewModel[]> {
+    const dataFutura = new Date(Date.now());
+    dataFutura.setDate(dataFutura.getDate() + 1);
+
     return this.http
-      .get<any>(this.endpoint + `futuros/${new Date(Date.now()).toDateString().replaceAll('/','-')}` +
+      .get<any>(this.endpoint + `futuros/${dataFutura.toDateString().replaceAll('/','-')}` +
       `=${new Date('12/12/2222').toDateString().replaceAll('/','-')}`, 
       this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados),
