@@ -49,7 +49,7 @@ export class LoginComponent {
   }
 
   processarSucesso(res: TokenViewModel) {
-    this.toastService.success('Seja bem-vindo' + res.usuarioToken.nome + '!', 
+    this.toastService.success('Seja bem-vindo ' + res.usuarioToken.nome + '!', 
     'Sucesso')
 
     this.router.navigate(['dashboard']);

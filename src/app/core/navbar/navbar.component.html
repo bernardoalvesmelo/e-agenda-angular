@@ -5,8 +5,9 @@
     <button (click)="estaColapsada = !estaColapsada" class="navbar-toggler" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" [ngbCollapse]="estaColapsada == true">
-      <div class="links w-100 text-center">
+    <div class="collapse navbar-collapse" [ngbCollapse]="estaColapsada">
+     
+      <div class="links w-100 text-center" *ngIf="(usuarioEstaLogado$ | async)">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link text-primary" routerLinkActive="fw-semibold" 
@@ -31,7 +32,14 @@
         </ul>
       </div>
     </div>
-    <div class="d-flex justify-content-end w-100 my-2 md-my-0 lg-my-0">
+    <div *ngIf="(usuarioEstaLogado$ | async)">
+      <button (click)="sair()" class="btn btn-primary px-5">
+        Sair
+        <i class="bi bi-door-open-fill"></i>
+      </button>
+    </div>
+    <div *ngIf="!(usuarioEstaLogado$ | async)"
+      class="d-flex justify-content-end w-100 my-2 md-my-0 lg-my-0">
       <a class="border border-primary rounded-3 bg-white fw-semibold p-1 mx-1 text-decoration-none" 
       routerLink="/registro">Registrar</a>
       <a class="border border-primary rounded-3 bg-white fw-semibold p-1 mx-1 text-decoration-none" 
