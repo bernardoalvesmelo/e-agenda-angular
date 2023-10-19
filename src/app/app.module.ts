@@ -8,17 +8,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ContatosModule } from './views/contatos/contatos.module';
-import { HttpClientModule } from '@angular/common/http';
-import { CompromissosModule } from './views/compromissos/compromissos.module';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { RegistroModule } from './views/registro/registro.module';
 import { LoginModule } from './views/login/login.module';
 import { AuthService } from './core/auth/services/auth.service';
+import { httpTokenInterceptor } from './core/auth/interceptors/http-token.interceptor';
 
 function logarUsuarioSalvoFactory(authService: AuthService) {
   return () => authService.logarUsuarioSalvo();
 }
+
+
 
 @NgModule({
   // Componentes e diretivas que o Módulo Distribui
@@ -36,7 +36,6 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
       preventDuplicates: true,
     }),
 
-    HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
     RegistroModule,
@@ -48,7 +47,9 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
     useFactory: logarUsuarioSalvoFactory,
     deps: [AuthService],
     multi: true
-  }],
+  },
+  provideHttpClient(withInterceptors([httpTokenInterceptor])),
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

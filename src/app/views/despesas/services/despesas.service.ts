@@ -19,47 +19,47 @@ export class DespesasService {
   public inserir(despesa: FormsDespesaViewModel): Observable<FormsDespesaViewModel> {
     console.log(despesa);
     return this.http.post<any>(
-      this.endpoint, despesa, this.obterHeadersAutorizacao())
+      this.endpoint, despesa)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public editar(id: string, despesa: FormsDespesaViewModel) {
     return this.http
-      .put<any>(this.endpoint + id, despesa, this.obterHeadersAutorizacao())
+      .put<any>(this.endpoint + id, despesa)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public excluir(id: string): Observable<any> {
-    return this.http.delete(this.endpoint + id, this.obterHeadersAutorizacao())
+    return this.http.delete(this.endpoint + id)
     .pipe(catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public selecionarTodos(): Observable<ListarDespesaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint, this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public selecionarDespesasAntigas(): Observable<ListarDespesaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint + 'antigas', this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint + 'antigas')
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public selecionarDespesasDoMes(): Observable<ListarDespesaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint + 'ultimos-30-dias', this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint + 'ultimos-30-dias')
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 
   public selecionarPorId(id: string): Observable<FormsDespesaViewModel> {
     return this.http
-      .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint + id)
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
@@ -69,8 +69,7 @@ export class DespesasService {
   ): Observable<VisualizarDespesaViewModel> {
     return this.http
       .get<any>(
-        this.endpoint + 'visualizacao-completa/' + id,
-        this.obterHeadersAutorizacao()
+        this.endpoint + 'visualizacao-completa/' + id
       )
       .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
@@ -93,15 +92,4 @@ export class DespesasService {
     return throwError(() => new Error(mensagemErro));
   }
 
-  private obterHeadersAutorizacao() {
-    const token = this.localStorageService
-      .obterDadosLocaisSalvos()?.chave;
-
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-  }
 }

@@ -50,7 +50,7 @@ public login(usuario:  AutenticarUsuarioViewModel): Observable<TokenViewModel> {
 }
 
 public logout(): Observable<any>{
-  return this.http.post<any>(this.endpointLogout, {}, this.obterHeadersAutorizacao())
+  return this.http.post<any>(this.endpointLogout, {})
     .pipe(
       tap(() => this.notificarLogout()),
       tap(() => this.localStorageService.limparDadosLocais())
