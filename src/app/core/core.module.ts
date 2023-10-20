@@ -4,8 +4,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
-import { ExibirCarregamentoComponent } from './exibir-carregamento/exibir-carregamento.component';
-import { ExibirCarregamentoModule } from './exibir-carregamento/exibir-carregamento.module';
+import { LoadingModule } from './loading/loading.module';
+
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -13,12 +13,12 @@ import { ExibirCarregamentoModule } from './exibir-carregamento/exibir-carregame
     CommonModule, 
     RouterModule,
     AuthModule, 
-    ExibirCarregamentoModule,
+    LoadingModule,
     NgbCollapseModule],
   exports: [
     NavbarComponent,
-    ExibirCarregamentoModule,
     AuthModule,
+    LoadingModule
   ],
 })
 export class CoreModule {}

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<app-exibir-carregamento></app-exibir-carregamento>
+<app-loading *ngIf="estaCarregando$ | async"></app-loading>
 <main>
   <router-outlet></router-outlet>
 </main>
