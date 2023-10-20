@@ -9,8 +9,6 @@ export const httpTokenInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn) => {
 
-    console.log('chamada');
-
   const exibirCarregamentoService = inject(ExibirCarregamentoService);
 
   exibirCarregamentoService.mostrarCarregamento();

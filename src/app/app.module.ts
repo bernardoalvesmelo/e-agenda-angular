@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,11 +14,14 @@ import { LoginModule } from './views/login/login.module';
 import { AuthService } from './core/auth/services/auth.service';
 import { httpTokenInterceptor } from './core/auth/interceptors/http-token.interceptor';
 
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt);
+
 function logarUsuarioSalvoFactory(authService: AuthService) {
   return () => authService.logarUsuarioSalvo();
 }
-
-
 
 @NgModule({
   // Componentes e diretivas que o Módulo Distribui
@@ -47,6 +50,14 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
     useFactory: logarUsuarioSalvoFactory,
     deps: [AuthService],
     multi: true
+  },
+  { 
+    provide: LOCALE_ID, 
+    useValue: "pt" 
+  },
+  { 
+    provide: DEFAULT_CURRENCY_CODE, 
+    useValue: 'BRL' 
   },
   provideHttpClient(withInterceptors([httpTokenInterceptor])),
 ],

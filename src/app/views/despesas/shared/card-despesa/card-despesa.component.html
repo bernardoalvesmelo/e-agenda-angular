@@ -7,7 +7,7 @@
     </div>
     <div class="d-flex flex-wrap w-100 py-1 px-2">
       <h6 class="card-title">Valor: </h6>
-      <h6 class="ms-auto fw-semibold text-muted">R$ {{ despesa.valor }}</h6>
+      <h6 class="ms-auto fw-semibold text-muted">{{ despesa.valor | currency }}</h6>
     </div>
     <div class="d-flex flex-wrap w-100 py-1 px-2">
       <h6 class="card-title">Data: </h6>
