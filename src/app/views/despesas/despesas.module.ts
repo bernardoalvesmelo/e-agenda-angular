@@ -13,8 +13,9 @@ import { DetalhesDespesaComponent } from './despesa-detalhes/detalhes-despesa.co
 
 import 'src/app/extensions/form-group.extension';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     ReactiveFormsModule, 
     DespesasRoutingModule,
-    CategoriasModule
+    CategoriasModule,
+
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     DespesasService,

@@ -13,6 +13,9 @@ import { ContatosModule } from '../contatos/contatos.module';
 
 import 'src/app/extensions/form-group.extension';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -28,7 +31,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule, 
     NgbModule,
     CompromissosRoutingModule,
-    ContatosModule
+    ContatosModule,
+
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     CompromissosService,

@@ -12,6 +12,9 @@ import { TarefasRoutingModule } from './tarefas-routing.module';
 
 import 'src/app/extensions/form-group.extension';
 import { ConcluirItensTarefaComponent } from './concluir-itens-tarefa/concluir-itens-tarefa.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,11 @@ import { ConcluirItensTarefaComponent } from './concluir-itens-tarefa/concluir-i
     CommonModule, 
     ReactiveFormsModule,
     NgbModule, 
-    TarefasRoutingModule],
+    TarefasRoutingModule,
+  
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule],
   providers: [TarefasService],
 })
 export class TarefasModule { }

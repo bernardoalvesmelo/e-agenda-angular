@@ -1,21 +1,21 @@
 <div class="card h-100 border-primary mb-2">
   <div class="d-flex flex-collumn flex-wrap">
     <div class="card-body d-flex flex-wrap w-100">
-      <a routerLink="/despesas/detalhes/{{despesa.id}}" class="card-title w-100 text-center fs-3 text-dark fw-bold">
+      <a routerLink="/despesas/detalhes/{{despesa.id}}" class="card-title w-100 text-center fs-4 text-dark fw-bold">
         {{ despesa.descricao }}
       </a>
     </div>
     <div class="d-flex flex-wrap w-100 py-1 px-2">
-      <h6 class="card-title">Valor: </h6>
-      <h6 class="ms-auto fw-semibold text-muted">{{ despesa.valor | currency }}</h6>
+      <h3 class="card-title">Valor: </h3>
+      <h3 class="ms-auto fw-semibold text-muted">{{ despesa.valor | currency }}</h3>
     </div>
     <div class="d-flex flex-wrap w-100 py-1 px-2">
-      <h6 class="card-title">Data: </h6>
-      <h6 class="ms-auto fw-semibold text-muted">{{ despesa.data | date }}</h6>
+      <h3 class="card-title">Data: </h3>
+      <h3 class="ms-auto fw-semibold text-muted">{{ despesa.data | date }}</h3>
     </div>
     <div class="d-flex flex-wrap w-100 py-1 px-2">
-      <h6 class="card-title">Forma de Pagamento: </h6>
-      <h6 class="ms-auto fw-semibold text-muted">{{ despesa.formaPagamento }}</h6>
+      <h3 class="card-title">Forma de Pagamento: </h3>
+      <h3 class="ms-auto fw-semibold text-muted">{{ despesa.formaPagamento }}</h3>
     </div>
     <div class="d-flex gap-2 w-100 justify-content-center card-footer bg-transparent">
       <button class="btn btn-outline-primary" aria-label="Editar" ngbTooltip="Editar" placement="bottom" 

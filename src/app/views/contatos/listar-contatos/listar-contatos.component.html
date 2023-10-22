@@ -9,25 +9,22 @@
       </div>
 
       <!-- Barra de Ações -->
-      <div class="d-grid d-md-flex gap-1 mt-3">
-        <a
+      <a
           [routerLink]="['/contatos/inserir']"
           role="button"
-          class="btn btn-primary me-md-1"
-        >
-          <i class="pi bi-plus-circle me-2"></i>
+          mat-fab extended color="primary">
+          <mat-icon class="bi bi-plus mb-1"></mat-icon>
           Novo Contato
-        </a>
-      </div>
+      </a>
 
       <!-- Listagem de Registros -->
       <div class="mt-3 row mb-1">
         <div class="d-flex flex-wrap gap-2 my-2">
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar todos" placement="bottom"
+        <button mat-raised-button color="primary" ngbTooltip="Mostrar todos" placement="bottom"
         (click)="mudarListagem('todos')">
           Todos
         </button>
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar contatos favoritos" placement="bottom"
+        <button mat-raised-button color="primary" ngbTooltip="Mostrar contatos favoritos" placement="bottom"
         (click)="mudarListagem('favoritos')">
           Favoritos
         </button>

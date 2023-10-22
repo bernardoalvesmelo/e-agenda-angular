@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
 import { LoadingModule } from './loading/loading.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -14,11 +17,18 @@ import { LoadingModule } from './loading/loading.module';
     RouterModule,
     AuthModule, 
     LoadingModule,
-    NgbCollapseModule],
+    NgbCollapseModule,
+  
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule],
   exports: [
     NavbarComponent,
     AuthModule,
-    LoadingModule
+    LoadingModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
 })
 export class CoreModule {}

@@ -11,6 +11,9 @@ import { CategoriasService } from './services/categorias.service';
 
 import 'src/app/extensions/form-group.extension';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule, 
     NgbModule,
     ReactiveFormsModule, 
-    CategoriasRoutingModule
+    CategoriasRoutingModule,
+
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
   providers: [CategoriasService],
 })

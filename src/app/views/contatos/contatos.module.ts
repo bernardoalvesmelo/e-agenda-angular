@@ -13,6 +13,9 @@ import 'src/app/extensions/form-group.extension';
 import { ContatosRoutingModule } from './contatos-routing.module';
 import { DetalhesContatoComponent } from './detalhes-contato/detalhes-contato.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [InserirContatoComponent, 
@@ -24,7 +27,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule, 
     ReactiveFormsModule,
     NgbModule, 
-    ContatosRoutingModule],
+    ContatosRoutingModule,
+  
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule],
   providers: [ContatosService],
 })
 export class ContatosModule {}

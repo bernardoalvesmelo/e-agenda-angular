@@ -9,31 +9,28 @@
         </div>
   
         <!-- Barra de Ações -->
-        <div class="d-grid d-md-flex gap-1 mt-3">
-          <a
-            [routerLink]="['/compromissos/inserir']"
-            role="button"
-            class="btn btn-primary me-md-1"
-          >
-            <i class="pi bi-plus-circle me-2"></i>
-            Novo Compromisso
-          </a>
-        </div>
+        <a
+          [routerLink]="['/compromissos/inserir']"
+          role="button"
+          mat-fab extended color="primary">
+          <mat-icon class="bi bi-plus mb-1"></mat-icon>
+          Novo Compromisso
+        </a>
 
         <div class="d-flex flex-wrap gap-2 my-2">
-          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar todos" placement="bottom"
+          <button mat-raised-button color="primary" ngbTooltip="Mostrar todos" placement="bottom"
            (click)="mudarListagem('todos')">
             Todos
           </button>
-          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar compromissos passados" placement="bottom"
+          <button mat-raised-button color="primary" ngbTooltip="Mostrar compromissos passados" placement="bottom"
            (click)="mudarListagem('passados')">
             Passados
           </button>
-          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar compromissos do dia atual" placement="bottom"
+          <button mat-raised-button color="primary" ngbTooltip="Mostrar compromissos do dia atual" placement="bottom"
            (click)="mudarListagem('hoje')">
             Hoje
           </button>
-          <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar compromissos futuros" placement="bottom"
+          <button mat-raised-button color="primary" ngbTooltip="Mostrar compromissos futuros" placement="bottom"
            (click)="mudarListagem('futuros')">
             Futuros
           </button>

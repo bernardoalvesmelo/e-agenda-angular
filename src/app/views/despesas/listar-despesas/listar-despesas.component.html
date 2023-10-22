@@ -9,23 +9,24 @@
       </div>
 
       <!-- Barra de Ações -->
-      <div class="d-grid d-md-flex gap-1 mt-3">
-        <a [routerLink]="['/despesas/inserir']" role="button" class="btn btn-primary me-md-1">
-          <i class="pi bi-plus-circle me-2"></i>
+      <a
+          [routerLink]="['/despesas/inserir']"
+          role="button"
+          mat-fab extended color="primary">
+          <mat-icon class="bi bi-plus mb-1"></mat-icon>
           Nova Despesa
-        </a>
-      </div>
+      </a>
 
       <div class="d-flex flex-wrap gap-2 my-2">
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar todas" placement="bottom"
+        <button mat-raised-button color="primary" ngbTooltip="Mostrar todas" placement="bottom"
           (click)="mudarListagem('todos')">
           Todas
         </button>
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar despesas antigas" placement="bottom"
+        <button mat-raised-button color="primary" ngbTooltip="Mostrar despesas antigas" placement="bottom"
           (click)="mudarListagem('antigas')">
           Antigas
         </button>
-        <button class="btn btn-primary rounded-3" ngbTooltip="Mostrar despesas dos últimos 30 dias" placement="bottom"
+        <button mat-raised-button color="primary" ngbTooltip="Mostrar despesas dos últimos 30 dias" placement="bottom"
           (click)="mudarListagem('mes')">
           Últimos 30 Dias
         </button>
