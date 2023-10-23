@@ -15,6 +15,7 @@ import { ConcluirItensTarefaComponent } from './concluir-itens-tarefa/concluir-i
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
   
     MatButtonModule,
     MatIconModule,
-    MatCardModule],
+    MatCardModule,
+    MatDividerModule],
   providers: [TarefasService],
 })
 export class TarefasModule { }

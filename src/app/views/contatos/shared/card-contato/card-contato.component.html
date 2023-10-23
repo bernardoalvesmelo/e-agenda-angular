@@ -1,39 +1,42 @@
-<div class="card h-100 border-primary mb-2">
-  <div class="d-flex flex-collumn flex-wrap">
-    <div class="card-body d-flex flex-wrap w-100">
-      <a routerLink="/contatos/detalhes/{{contato.id}}" class="card-title fs-4 w-100 text-center text-dark fw-bold">
-        {{ contato.nome }}
-      </a>
-    </div>
-    <div class="d-flex flex-wrap w-100 py-1 px-2">
+<mat-card class="h-100 mb-2">
+  <mat-card-header class="mb-2">
+    <mat-card-title>{{ contato.nome }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="d-flex flex-wrap w-100 px-2">
       <h3 class="card-title">Telefone: </h3>
       <h3 class="ms-auto fw-semibold text-muted">{{ contato.telefone }}</h3>
     </div>
-    <div class="d-flex flex-wrap w-100 py-1 px-2">
+    <div class="d-flex flex-wrap w-100 px-2">
       <h3 class="card-title">Cargo: </h3>
       <h3 class="ms-auto fw-semibold text-muted">{{ contato.cargo }}</h3>
     </div>
-    <div class="d-flex flex-wrap w-100 py-1 px-2">
+    <div class="d-flex flex-wrap w-100 px-2">
       <h3 class="card-title">Empresa: </h3>
       <h3 class="ms-auto fw-semibold text-muted">{{ contato.empresa }}</h3>
     </div>
-    <div class="d-flex gap-2 w-100 justify-content-center card-footer bg-transparent">
-      <button *ngIf="!this.contato.favorito" (click)="mudarFavorito()"class="btn btn-outline-primary" 
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-fab color="basic" aria-label="Detalhes" ngbTooltip="Ver detalhes" placement="bottom"
+      routerLink="/contatos/detalhes/{{ contato.id }}" class="mx-1">
+      <mat-icon class="bi bi-eye"></mat-icon>
+    </button>
+    <button *ngIf="!this.contato.favorito" mat-fab color="accent" (click)="mudarFavorito()" class="mx-1" 
       aria-label="Favoritar" ngbTooltip="Favoritar" placement="bottom">
-        <i class="bi bi-heart"></i>
-      </button>
-      <button *ngIf="this.contato.favorito" (click)="mudarFavorito()"class="btn btn-outline-primary" 
+        <mat-icon class="bi bi-heart"></mat-icon>
+    </button>
+    <button *ngIf="this.contato.favorito" mat-fab color="accent" (click)="mudarFavorito()" class="mx-1" 
       aria-label="Desfavoritar" ngbTooltip="Desfavoritar" placement="bottom">
-        <i class="bi bi-heart-fill"></i>
-      </button>
-      <button class="btn btn-outline-primary" aria-label="Editar" ngbTooltip="Editar" placement="bottom"
-        routerLink="/contatos/editar/{{ contato.id }}">
-        <i class="bi bi-pen"></i>
-      </button>
-      <button class="btn btn-outline-primary" aria-label="Excluir" ngbTooltip="Excluir" placement="bottom"
-        routerLink="/contatos/excluir/{{ contato.id }}">
-        <i class="bi bi-trash"></i>
-      </button>
-    </div>
-  </div>
-</div>
+        <mat-icon class="bi bi-heart-fill"></mat-icon>
+    </button>
+    <button mat-fab color="primary" aria-label="Editar" ngbTooltip="Editar" placement="bottom"
+      routerLink="/contatos/editar/{{ contato.id }}" class="mx-1">
+      <mat-icon class="bi bi-pen"></mat-icon>
+    </button>
+    <button mat-fab color="warn" aria-label="Excluir" ngbTooltip="Excluir" placement="bottom"
+      routerLink="/contatos/excluir/{{ contato.id }}" class="mx-1">
+      <mat-icon class="bi bi-trash"></mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

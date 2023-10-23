@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [InserirContatoComponent, 
@@ -31,7 +32,8 @@ import { MatIconModule } from '@angular/material/icon';
   
     MatButtonModule,
     MatIconModule,
-    MatCardModule],
+    MatCardModule,
+    MatDividerModule],
   providers: [ContatosService],
 })
 export class ContatosModule {}

@@ -61,8 +61,7 @@
             <label class="form-label">Título:</label>
             <input formControlName="titulo" [ngClass]="campoEstaInvalidoItem('titulo') ? 'is-invalid' : ''"
               class="form-control" type="text" placeholder="Digite o título do item" />
-            <button (click)="adicionarItem()" type="button" class="btn btn-primary px-5 my-1">
-                <i class="bi bi-save me-2"></i>
+            <button (click)="adicionarItem()" type="button" mat-raised-button color="primary" class="px-5 my-1">
                 Adicionar Item
             </button>
             </div>
@@ -71,7 +70,6 @@
             </div>
           </div>
         </form>
-  
 
         <div class="card-footer g-grid d-flex gap-1 mt-5 mb-1">
           <button data-cy="btnGravar" type="submit" mat-fab extended color="primary" class="px-5">
