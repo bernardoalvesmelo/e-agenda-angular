@@ -80,8 +80,8 @@ export class EditarDespesaComponent {
     this.categorias.forEach((categoria) => {
       opcoesFormArray.push(this.formBuilder.group({
         id: categoria.id, 
-        name: categoria.titulo,
-        selected: categoriasDespesa.includes(categoria.id)
+        nome: categoria.titulo,
+        checked: categoriasDespesa.includes(categoria.id)
       }));
     });
   }
@@ -112,7 +112,7 @@ export class EditarDespesaComponent {
 
     const categoriasForm: any[] = valorForm.categoriasSelecionadas;
 
-    const categorias: string[] = (categoriasForm.filter((c) => c.selected)
+    const categorias: string[] = (categoriasForm.filter((c) => c.checked)
     .map((opcao) => opcao.id));
 
     const novaDespesa = {

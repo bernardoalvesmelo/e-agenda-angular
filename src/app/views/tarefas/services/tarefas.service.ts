@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, filter, map, tap, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { FormsTarefaViewModel } from '../models/tarefa/forms-tarefa.view-model';
 import { ListarTarefaViewModel } from '../models/tarefa/listar-tarefa.view-model';
 import { VisualizarTarefaViewModel } from '../models/tarefa/visualizar-tarefa.view-model';
 import { isNgTemplate } from '@angular/compiler';
 import { FormsCompletoTarefaViewModel } from '../models/tarefa/forms-completo-tarefa.view-model';
-import { LocalStorageService } from 'src/app/core/auth/services/local-store.service';
 
 
 @Injectable()
@@ -15,9 +13,7 @@ export class TarefasService {
   private endpoint: string =
     'https://e-agenda-web-api.onrender.com/api/tarefas/';
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   public inserir(tarefa: FormsTarefaViewModel): Observable<FormsTarefaViewModel> {
     return this.http.post<any>(
@@ -64,8 +60,7 @@ export class TarefasService {
   public selecionarPorId(id: string): Observable<FormsTarefaViewModel> {
     return this.http
       .get<any>(this.endpoint + id)
-      .pipe(tap(res => console.log(res)),
-      map((res) => res.dados),
+      .pipe(map((res) => res.dados),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err)));
   }
 

@@ -17,37 +17,37 @@
 
       <dl class="form-group mt-4 row">
         <dt class="col-md-4">
-          <label class="control-label">Nome:</label>
+          <mat-label class="control-label">Nome:</mat-label>
         </dt>
         <dd class="col-md-8">{{ contatoVM.nome }}</dd>
 
         <dt class="col-md-4">
-          <label class="control-label">Email:</label>
+          <mat-label class="control-label">Email:</mat-label>
         </dt>
         <dd class="col-md-8">{{ contatoVM.email }}</dd>
 
         <dt class="col-md-4">
-          <label class="control-label">Telefone:</label>
+          <mat-label class="control-label">Telefone:</mat-label>
         </dt>
         <dd class="col-md-8">{{ contatoVM.telefone }}</dd>
 
         <dt class="col-md-4">
-          <label class="control-label">Cargo:</label>
+          <mat-label class="control-label">Cargo:</mat-label>
         </dt>
         <dd class="col-md-8">{{ contatoVM.cargo }}</dd>
 
         <dt class="col-md-4">
-          <label class="control-label">Empresa:</label>
+          <mat-label class="control-label">Empresa:</mat-label>
         </dt>
         <dd class="col-md-8">{{ contatoVM.empresa }}</dd>
 
         <dt class="col-12">
-          <label class="control-label">Compromissos:</label>
+          <mat-label class="control-label">Compromissos:</mat-label>
         </dt>
         <dl *ngFor="let compromisso of contatoVM.compromissos"
           class="form-group mt-2 d-flex flex-wrap rounded-3 align-items-center">
           <dt class="border-bottom">
-            <label class="control-label px-3">Assunto:</label>
+            <mat-label class="control-label px-3">Assunto:</mat-label>
           </dt>
           <dd class="border-bottom pt-2">{{ compromisso.assunto }}</dd>
         </dl>

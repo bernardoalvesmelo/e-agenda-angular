@@ -1,70 +1,50 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
-      <div class="text-md-start">
-        <h1 class="fw-bold text-primary">Inserir Novo Contato</h1>
-      </div>
+<div class="container d-flex flex-column align-items-center">
+  <h1 class="fw-bold text-primary mt-2">Criar Novo Contato</h1>
 
-      <form [formGroup]="form" (ngSubmit)="gravar()" class="mt-4">
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Nome:</label>
-          <input formControlName="nome" [ngClass]="campoEstaInvalido('nome') ? 'is-invalid' : ''" class="form-control"
-            type="text" placeholder="Digite o nome do contato" />
-          <div *ngIf="campoEstaInvalido('nome')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">O nome precisa ser preenchido.</span>
-          </div>
-        </div>
+  <form [formGroup]="form" (ngSubmit)="gravar()" class="d-flex flex-column mt-3">
+    <mat-form-field>
+      <mat-label>Nome:</mat-label>
+      <input matInput formControlName="nome" class="form-control" type="text" 
+        placeholder="Digite o nome do contato"
+        required />
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Email:</label>
-          <input formControlName="email" [ngClass]="campoEstaInvalido('email') ? 'is-invalid' : ''" class="form-control"
-            type="text" placeholder="Digite o email do contato" />
-          <div *ngIf="campoEstaInvalido('email')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1" *ngIf="email?.errors?.['required']">O email precisa
-              ser preenchido.</span>
-            <span class="bg-danger rounded-2 text-light px-2 pb-1" *ngIf="email?.errors?.['email']">O valor precisa ter
-              um formato de email.</span>
-          </div>
-        </div>
+    <mat-form-field>
+      <mat-label class="form-mat-label">Email:</mat-label>
+      <input matInput formControlName="email" class="form-control" type="text" 
+        placeholder="Digite o email do contato"
+        required />
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Telefone:</label>
-          <input formControlName="telefone" [ngClass]="campoEstaInvalido('telefone') ? 'is-invalid' : ''"
-            class="form-control" type="text" placeholder="Digite o telefone do contato" />
-          <div *ngIf="campoEstaInvalido('telefone')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">O telefone precisa ser preenchido.</span>
-          </div>
-        </div>
+    <mat-form-field>
+      <mat-label class="form-mat-label">Telefone:</mat-label>
+      <input matInput formControlName="telefone" class="form-control" type="text"
+        placeholder="Digite o telefone do contato" required />
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Cargo:</label>
-          <input formControlName="cargo" [ngClass]="campoEstaInvalido('cargo') ? 'is-invalid' : ''" class="form-control"
-            type="text" placeholder="Digite o cargo do contato" />
-          <div *ngIf="campoEstaInvalido('cargo')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">O cargo precisa ser preenchido.</span>
-          </div>
-        </div>
+    <mat-form-field>
+      <mat-label class="form-mat-label">Cargo:</mat-label>
+      <input matInput formControlName="cargo" class="form-control" type="text" 
+        placeholder="Digite o cargo do contato"
+        required />
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Empresa:</label>
-          <input formControlName="empresa" [ngClass]="campoEstaInvalido('empresa') ? 'is-invalid' : ''"
-            class="form-control" type="text" placeholder="Digite a empresa do contato" />
-          <div *ngIf="campoEstaInvalido('empresa')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">A empresa precisa ser preenchida.</span>
-          </div>
-        </div>
+    <mat-form-field>
+      <mat-label class="form-mat-label">Empresa:</mat-label>
+      <input matInput formControlName="empresa" class="form-control" type="text"
+        placeholder="Digite a empresa do contato" required />
+    </mat-form-field>
 
-        <div class="card-footer g-grid d-flex gap-1 mt-5 mb-1">
-          <button type="submit" mat-fab extended color="primary" class="px-5">
-            <mat-icon class="bi bi-save me-2"></mat-icon>
-            Gravar
-          </button>
-          <button routerLink="/contatos/listar" type="button" mat-fab extended color="basic" class="px-5">
-            <mat-icon class="bi bi-arrow-return-left me-2"></mat-icon>
-            Voltar
-          </button>
-        </div>
-      </form>
+    <div class="card-footer d-flex gap-1 mt-4 mb-1">
+      <button data-cy="btnGravar" (click)="gravar()" type="button" mat-fab extended color="primary" 
+        class="px-4">
+        <mat-icon class="bi bi-save me-2"></mat-icon>
+        Gravar
+      </button>
+      <button routerLink="/contatos/listar" type="button" mat-fab extended color="basic" class="px-4">
+        <mat-icon class="bi bi-arrow-return-left me-2"></mat-icon>
+        Voltar
+      </button>
     </div>
-  </div>
+  </form>
 </div>

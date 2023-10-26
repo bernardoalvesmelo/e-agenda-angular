@@ -17,42 +17,42 @@
   
         <dl class="form-group mt-4 row">
           <dt class="col-md-4">
-            <label class="control-label">Assunto:</label>
+            <mat-label class="control-label">Assunto:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.assunto}}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Tipo de Compromisso:</label>
+            <mat-label class="control-label">Tipo de Compromisso:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.tipoLocal == 0 ? 'Remoto' : 'Presencial'}}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Link:</label>
+            <mat-label class="control-label">Link:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.link}}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Local:</label>
+            <mat-label class="control-label">Local:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.local}}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Data:</label>
+            <mat-label class="control-label">Data:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.data | date }}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Horário de Início:</label>
+            <mat-label class="control-label">Horário de Início:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.horaInicio}}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Horário de Término:</label>
+            <mat-label class="control-label">Horário de Término:</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.horaTermino}}</dd>
   
           <dt class="col-md-4">
-            <label class="control-label">Contato (opcional):</label>
+            <mat-label class="control-label">Contato (opcional):</mat-label>
           </dt>
           <dd class="col-md-8">{{compromissoVM.contato ? compromissoVM.contato.nome : ''}}</dd>
         </dl>

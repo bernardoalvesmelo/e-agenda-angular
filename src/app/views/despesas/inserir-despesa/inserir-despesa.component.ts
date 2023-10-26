@@ -49,8 +49,8 @@ export class InserirDespesaComponent {
     this.categorias.forEach((categoria) => {
       opcoesFormArray.push(this.formBuilder.group({
         id: categoria.id, 
-        name: categoria.titulo,
-        selected: false
+        nome: categoria.titulo,
+        checked: false
       }));
     });
   }
@@ -69,6 +69,8 @@ export class InserirDespesaComponent {
     }
 
     this.despesaVM = this.obterValorForm();
+    
+    console.log(this.despesaVM);
 
     this.despesaService.inserir(this.despesaVM).subscribe({
       next: (res: FormsDespesaViewModel) => this.processarSucesso(res),
@@ -81,9 +83,10 @@ export class InserirDespesaComponent {
 
     const categoriasForm: any[] = valorForm.categoriasSelecionadas;
 
-    const categorias: string[] = (categoriasForm.filter((c) => c.selected)
+    const categorias: string[] = (categoriasForm.filter((c) => c.checked)
     .map((opcao) => opcao.id));
 
+    
     const novaDespesa = {
       descricao: valorForm.descricao ?? '',
       valor: valorForm.valor ?? 0,

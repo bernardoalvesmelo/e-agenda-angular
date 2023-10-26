@@ -1,87 +1,60 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
-      <div class="text-md-start">
-        <h1 class="fw-bold text-primary">Inserir Nova Despesa</h1>
-      </div>
+<div class="container d-flex flex-column align-items-center">
+  <h1 class="fw-bold text-primary mt-2">Inserir Nova Despesa</h1>
 
-      <form [formGroup]="form" (ngSubmit)="gravar()" class="mt-4">
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Descrição:</label>
-          <input formControlName="descricao" [ngClass]="campoEstaInvalido('descricao') ? 'is-invalid' : ''"
-            class="form-control" type="text" placeholder="Digite a descrição da despesa" />
-          <div *ngIf="campoEstaInvalido('descricao')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">
-              A descrição precisa ser preenchida com no minímo 3 caracteres.
-            </span>
-          </div>
-        </div>
+  <form [formGroup]="form" (ngSubmit)="gravar()" class="d-flex flex-column mt-3">
+    <mat-form-field>
+      <mat-label>Descrição:</mat-label>
+      <input matInput formControlName="descricao" class="form-control" type="text"
+        placeholder="Digite a descrição da despesa" required />
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Valor R$:</label>
-          <input formControlName="valor" [ngClass]="campoEstaInvalido('valor') ? 'is-invalid' : ''"
-            class="form-control" type="number" placeholder="Digite o valor da despesa" />
-          <div *ngIf="campoEstaInvalido('valor')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">
-              O valor precisa ser preenchido com no mínimo 0.1 reais.
-            </span>
-          </div>
-        </div>
+    <mat-form-field>
+      <mat-label>Valor R$:</mat-label>
+      <input matInput formControlName="valor" class="form-control" type="number" 
+        placeholder="Digite o valor da despesa" required />
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Data:</label>
-          <input formControlName="data" [ngClass]="campoEstaInvalido('data') ? 'is-invalid' : ''" class="form-control"
-            type="date" />
-          <div *ngIf="campoEstaInvalido('data')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">A data precisa ser preenchida.</span>
-          </div>
-        </div>
+    <mat-form-field>
+      <mat-label>Data</mat-label>
+      <input formControlName="data" class="form-control" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Forma de Pagamento:</label>
-
-          <div class="d-flex align-items-center gap-2">
-            <input [ngClass]="campoEstaInvalido('formaPagamento') ? 'is-invalid' : ''" formControlName="formaPagamento"
-              name="formaPagamento" type="radio" [value]="0" />
-            Pix
-
-            <input [ngClass]="campoEstaInvalido('formaPagamento') ? 'is-invalid' : ''" formControlName="formaPagamento"
-              name="formaPagamento" type="radio" [value]="1" />
-            À Vista
-
-            <input [ngClass]="campoEstaInvalido('formaPagamento') ? 'is-invalid' : ''" formControlName="formaPagamento"
-              name="formaPagamento" type="radio" [value]="2" />
-            Cartão de Crédito
-          </div>
-          <div *ngIf="campoEstaInvalido('formaPagamento')">
-            <span class="bg-danger rounded-2 text-light px-2 pb-1">a forma de pagamento precisa ser preenchida.</span>
-          </div>
-        </div>
-
-        <div class="form-group mb-3 position-relative">
-          <label class="form-label">Categorias:</label>
-        </div>
-
-        <div class="d-flex flex-wrap gap-2" *ngIf="categorias.length > 0" formArrayName="categoriasSelecionadas">
-          <div *ngFor="let categoria of form.get('categoriasSelecionadas')?.value; let i = index"
-          [formGroupName]="i" class="bg-light border rounded-pill p-2">
-            <label>
-              <input type="checkbox" formControlName="selected"> {{ categoria.name }}
-            </label>
-          </div>
-        </div>
-
-        <div class="card-footer g-grid d-flex gap-1 mt-5 mb-1">
-          <button data-cy="btnGravar" type="submit" mat-fab extended color="primary" class="px-5">
-            <mat-icon class="bi bi-save me-2"></mat-icon>
-            Gravar
-          </button>
-          <button routerLink="/despesas/listar" type="button" mat-fab extended color="basic" class="px-5">
-            <mat-icon class="bi bi-arrow-return-left me-2"></mat-icon>
-            Voltar
-          </button>
-        </div>
-      </form>
+    <div class="pb-2 d-flex flex-column">
+      <mat-label class="form-label">Forma de Pagamento:</mat-label>
+      <mat-radio-group formControlName="formaPagamento">
+        <mat-radio-button [value]="0">Pix</mat-radio-button>
+        <mat-radio-button [value]="1">À Vista</mat-radio-button>
+        <mat-radio-button [value]="2">Cartão de Crédito</mat-radio-button>
+      </mat-radio-group>
     </div>
-  </div>
+
+    <div class="form-group mb-2">
+      <mat-label>Categorias:</mat-label>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2" *ngIf="categorias.length > 0" 
+      formArrayName="categoriasSelecionadas">
+      <div *ngFor="let categoria of form.get('categoriasSelecionadas')?.value; let i = index" 
+        [formGroupName]="i">
+        <mat-checkbox formControlName="checked">
+          {{ categoria.nome }}
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <div class="card-footer g-grid d-flex gap-1 mt-4 mb-1">
+        <button data-cy="btnGravar" type="submit" mat-fab extended color="primary" class="px-4">
+          <mat-icon class="bi bi-save me-2"></mat-icon>
+          Gravar
+        </button>
+        <button routerLink="/despesas/listar" type="button" mat-fab extended color="basic" class="px-4">
+          <mat-icon class="bi bi-arrow-return-left me-2"></mat-icon>
+          Voltar
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

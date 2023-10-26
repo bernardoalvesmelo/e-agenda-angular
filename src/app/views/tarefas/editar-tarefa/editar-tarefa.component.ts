@@ -69,8 +69,8 @@ export class EditarTarefaComponent implements OnInit{
     itens.forEach((item) => {
       itensFormArray.push(this.formBuilder.group({
         id: item.id,
-        name: item.titulo,
-        selected: true
+        nome: item.titulo,
+        checked: true
       }));
     });
   }
@@ -79,8 +79,8 @@ export class EditarTarefaComponent implements OnInit{
     const itensFormArray = this.form.get('itens') as FormArray;
 
     itensFormArray.push(this.formBuilder.group({ 
-      name: titulo,
-      selected: true
+      nome: titulo,
+      checked: true
     }));
 
     this.formItem.get('titulo')?.setValue('');
@@ -134,9 +134,9 @@ export class EditarTarefaComponent implements OnInit{
 
     const concluido = itemSelecionado ? itemSelecionado.concluido : false;
     let status = itemSelecionado ? 0 : 1;
-    status = item.selected ? status : 2;
+    status = item.checked ? status : 2;
 
-    return new FormsCompletoItemTarefaViewModel(item.id, item.name, status, concluido);
+    return new FormsCompletoItemTarefaViewModel(item.id, item.nome, status, concluido);
   }
 
   adicionarItem() {

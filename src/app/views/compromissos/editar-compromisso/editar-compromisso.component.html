@@ -11,10 +11,9 @@
     <div class="pb-2 d-flex flex-column">
       <mat-label class="form-label">Tipo de Compromisso:</mat-label>
       <mat-radio-group formControlName="tipoLocal">
-        <mat-radio-button value="0">Remoto</mat-radio-button>
-        <mat-radio-button value="1">Presencial</mat-radio-button>
+        <mat-radio-button [value]="0">Remoto</mat-radio-button>
+        <mat-radio-button [value]="1">Presencial</mat-radio-button>
       </mat-radio-group>
-
     </div>
     <mat-form-field>
       <mat-label>Link:</mat-label>
@@ -61,7 +60,7 @@
       </mat-select>
     </div>
 
-    <div class="card-footer g-grid d-flex gap-1 mt-4 mb-1">
+    <div class="card-footer d-flex gap-1 mt-4 mb-1">
       <button data-cy="btnGravar" type="submit" mat-fab extended color="primary" class="px-4">
         <mat-icon class="bi bi-save me-2"></mat-icon>
         Gravar

@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { FormsCompromissoViewModel } from '../models/forms-compromisso.view-model';
 import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
 import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
 
 import 'src/app/extensions/form-group.extension';
-import { LocalStorageService } from 'src/app/core/auth/services/local-store.service';
 
 
 @Injectable()
@@ -15,9 +14,7 @@ export class CompromissosService {
   private endpoint: string =
     'https://e-agenda-web-api.onrender.com/api/compromissos/';
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   public inserir(compromisso: FormsCompromissoViewModel): Observable<FormsCompromissoViewModel> {
     return this.http.post<any>(

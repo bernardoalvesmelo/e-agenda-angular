@@ -39,8 +39,8 @@ export class InserirTarefaComponent implements OnInit{
     const itensFormArray = this.form.get('itens') as FormArray;
 
     itensFormArray.push(this.formBuilder.group({ 
-      name: titulo,
-      selected: true
+      nome: titulo,
+      checked: true
     }));
 
     this.formItem.get('titulo')?.setValue('');
@@ -76,8 +76,8 @@ export class InserirTarefaComponent implements OnInit{
 
     const itensForm: any[] = valorForm.itens;
 
-    const itens: FormsItemTarefaViewModel[] = (itensForm.filter((c) => c.selected)
-    .map((item) => new FormsItemTarefaViewModel(item.name, 1, false)));
+    const itens: FormsItemTarefaViewModel[] = (itensForm.filter((c) => c.checked)
+    .map((item) => new FormsItemTarefaViewModel(item.nome, 1, false)));
 
     const novaTarefa = {
       titulo: valorForm.titulo ?? '',

@@ -57,8 +57,8 @@ export class ConcluirItensTarefaComponent implements OnInit{
     itens.forEach((item) => {
       itensFormArray.push(this.formBuilder.group({
         id: item.id ?? '',
-        name: item.titulo,
-        selected: item.concluido
+        nome: item.titulo,
+        checked: item.concluido
       }));
     });
   }
@@ -90,7 +90,7 @@ export class ConcluirItensTarefaComponent implements OnInit{
     const itensForm: any[] = valorForm.itens;
 
     const itens: FormsCompletoItemTarefaViewModel[] = (itensForm
-    .map((item) => new FormsCompletoItemTarefaViewModel(item.id, item.name, 0, item.selected)));
+    .map((item) => new FormsCompletoItemTarefaViewModel(item.id, item.nome, 0, item.checked)));
 
     const novaTarefa = {
       id: this.idSelecionado,

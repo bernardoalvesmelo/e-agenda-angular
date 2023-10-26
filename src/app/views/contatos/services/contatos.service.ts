@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Observable, catchError, filter, map, tap, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 import { VisualizarContatoViewModel } from '../models/visualizar-contato.view-model';
-import { LocalStorageService } from 'src/app/core/auth/services/local-store.service';
+
 
 @Injectable()
 export class ContatosService {
   private endpoint: string =
     'https://e-agenda-web-api.onrender.com/api/contatos/';
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   public inserir(contato: FormsContatoViewModel): Observable<FormsContatoViewModel> {
     return this.http.post<any>(
